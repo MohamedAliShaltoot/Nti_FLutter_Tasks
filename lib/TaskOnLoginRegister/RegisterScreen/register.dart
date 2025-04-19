@@ -6,7 +6,6 @@ import 'package:nti_flutter_tasks/core/widgets/customTextFormField.dart';
 import 'package:nti_flutter_tasks/core/widgets/customTextFormUserName.dart';
 import 'package:nti_flutter_tasks/core/widgets/lastStringLine.dart';
 
-
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
 
@@ -21,7 +20,8 @@ class _LoginScreenState extends State<RegisterScreen> {
   TextEditingController confirmPasswordController = TextEditingController();
   bool isPasswordVisible = false;
   bool isConfirmPasswordVisible = false;
-
+  int selectedGender = 0;
+  bool isChecked = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,7 +53,7 @@ class _LoginScreenState extends State<RegisterScreen> {
                 },
                 hintText: "Username",
               ),
-          
+
               const SizedBox(height: 23),
               TextFormPasswordField.getTextFormField(
                 passwordController: passwordController,
@@ -92,7 +92,97 @@ class _LoginScreenState extends State<RegisterScreen> {
                   return null;
                 },
               ),
-              const SizedBox(height: 23),
+              const SizedBox(height: 15),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Container(
+                  height: 50,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: const Color.fromARGB(255, 27, 26, 26),
+                      width: 1,
+                    ),
+                    borderRadius: BorderRadius.circular(15),
+                    color: const Color(0xffFFFFFF),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          "Remember me?",
+                          style: TextStyle(fontSize: 18),
+                        ),
+                        Checkbox(
+                          fillColor: WidgetStateProperty.all<Color>(
+                            Color.fromARGB(255, 133, 183, 153),
+                          ),
+                          checkColor: const Color.fromARGB(255, 18, 17, 17),
+                          activeColor: const Color.fromARGB(255, 179, 11, 11),
+
+                          value: isChecked,
+                          onChanged: (value) {
+                            setState(() {
+                              isChecked = value!;
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 15),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: DropdownButtonFormField(
+                  decoration: InputDecoration(
+                    fillColor: const Color(0xffFFFFFF),
+                    filled: true,
+                
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                      borderSide: BorderSide(
+                        width: 1,
+                        color: Color.fromARGB(255, 12, 13, 13),
+                      ),
+                    ),
+                  ),
+                
+                  dropdownColor: const Color(0xfff3f5f4),
+                
+                  iconEnabledColor: Color(0xff149954),
+                  value: selectedGender,
+                  items: const [
+                    DropdownMenuItem(
+                      value: 0,
+                      child: Text(
+                        "Male",
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 10, 10, 10),
+                        ),
+                      ),
+                    ),
+                    DropdownMenuItem(
+                      value: 1,
+                      child: Text(
+                        "Female",
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 17, 17, 17),
+                        ),
+                      ),
+                    ),
+                  ],
+                  onChanged: (value) {
+                    // Handle gender selection
+                    setState(() {});
+                    selectedGender = value!;
+                  },
+                ),
+              ),
+
+              const SizedBox(height: 33),
               Customelevatedbutton.getElevatedButton(
                 onTap: () {
                   if (formKey.currentState!.validate()) {
@@ -106,7 +196,7 @@ class _LoginScreenState extends State<RegisterScreen> {
                       );
                       return;
                     }
-          
+
                     // Everything is valid
                     if (kDebugMode) {
                       print("Success: Form is valid and passwords match!");
@@ -115,17 +205,18 @@ class _LoginScreenState extends State<RegisterScreen> {
                 },
                 title: "Register",
               ),
-          
+
               const SizedBox(height: 23),
-              LastStringLine.getLastStringLine(onTap:() {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => LoginScreen()),
-                      );
-                    },
-               text1: "Already Have An Account?", 
-               text2: "Login"),
-            
+              LastStringLine.getLastStringLine(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginScreen()),
+                  );
+                },
+                text1: "Already Have An Account?",
+                text2: "Login",
+              ),
             ],
           ),
         ),
