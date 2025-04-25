@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:nti_flutter_tasks/TaskOnLoginRegister/RegisterScreen/register.dart';
 
+import 'core/utils/app_colors.dart';
+import 'core/utils/constant.dart';
+import 'features/OnBoarding%20Screens/view/splash_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,9 +16,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Authentication',
+      title: AppConstant.appTitle,
+      theme: ThemeData(
+        scaffoldBackgroundColor: AppColors.scaffoldBackground,
+        fontFamily: AppConstant.fontFamily,
+      ),
 
-      home: RegisterScreen(),
+      home: SplashScreen(),
     );
   }
 }
