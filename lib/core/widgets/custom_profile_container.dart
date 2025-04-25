@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:nti_flutter_tasks/core/app_assets.dart';
-import 'package:nti_flutter_tasks/core/app_colors.dart';
+
+import '../utils/app_assets.dart';
+import '../utils/app_colors.dart';
 
 class CustomProfileContainer {
   static Widget getCustomProfileContainer({
