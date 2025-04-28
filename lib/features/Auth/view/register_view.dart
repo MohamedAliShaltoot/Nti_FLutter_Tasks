@@ -1,5 +1,5 @@
-
 import 'package:flutter/material.dart';
+import 'package:nti_flutter_tasks/features/home_screen/view/home_no_task_view.dart';
 
 import '../../../core/utils/app_assets.dart';
 import '../../../core/utils/app_colors.dart';
@@ -7,7 +7,7 @@ import '../../../core/widgets/customElevatedButton.dart';
 import '../../../core/widgets/customTextFormField.dart';
 import '../../../core/widgets/customTextFormUserName.dart';
 import '../../../core/widgets/lastStringLine.dart';
-import '../../task_screen/view/no_task_view.dart';
+
 import 'login_view.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -28,10 +28,9 @@ class _LoginScreenState extends State<RegisterScreen> {
   bool isChecked = false;
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      
+
       body: Form(
         key: formKey,
         child: SingleChildScrollView(
@@ -40,10 +39,7 @@ class _LoginScreenState extends State<RegisterScreen> {
               SizedBox(
                 height: 310,
                 width: double.infinity,
-                child: Image.asset(
-                  AppAssets.myProfileImage,
-                  fit: BoxFit.fill,
-                ),
+                child: Image.asset(AppAssets.myProfileImage, fit: BoxFit.fill),
               ),
               const SizedBox(height: 23),
               TextUserNameFormField.getTextFormField(
@@ -145,7 +141,7 @@ class _LoginScreenState extends State<RegisterScreen> {
                   decoration: InputDecoration(
                     fillColor: const Color(0xffFFFFFF),
                     filled: true,
-                
+
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
                       borderSide: BorderSide(
@@ -154,9 +150,9 @@ class _LoginScreenState extends State<RegisterScreen> {
                       ),
                     ),
                   ),
-                
+
                   dropdownColor: const Color(0xfff3f5f4),
-                
+
                   iconEnabledColor: AppColors.primary,
                   value: selectedGender,
                   items: const [
@@ -208,13 +204,11 @@ class _LoginScreenState extends State<RegisterScreen> {
                   //   }
                   // }
 
-
-
                   // disable it temporary
 
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => TaskScreen()),
+                    MaterialPageRoute(builder: (context) => HomeScreen()),
                   );
                 },
                 title: "Register",

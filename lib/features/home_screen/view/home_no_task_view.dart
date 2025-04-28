@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nti_flutter_tasks/features/home_screen/view/home_tasks_view.dart';
 
 import '../../../core/helper/svg_picture_custom.dart';
 import '../../../core/utils/app_assets.dart';
@@ -19,7 +20,16 @@ class HomeScreen extends StatelessWidget {
         tooltip: "Add Task",
         shape: const CircleBorder(),
         backgroundColor: AppColors.primary,
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return HomeTaskContentScreen();
+              },
+            ),
+          );
+        },
         child: setSvgPicture(
           assetPath: AppAssets.paperPlusIcon,
           width: 24,
