@@ -6,4 +6,5 @@ Tasks App from NTI_Traning
   <br>
   <em>Home Screen of the App</em>
 </p>
+![App Screenshot](assets\images\read_me\home_screen.png)
 
