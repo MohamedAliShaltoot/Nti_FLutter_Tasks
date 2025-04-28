@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+
 import '../../../core/utils/app_assets.dart';
 import '../../../core/utils/app_colors.dart';
 import '../../../core/widgets/customElevatedButton.dart';
-import '../../Add%20Task%20Screen/view/widgets/text_task_content.dart';
+import 'widgets/text_task_content.dart';
 
 class AddTaskView extends StatefulWidget {
   const AddTaskView({super.key});

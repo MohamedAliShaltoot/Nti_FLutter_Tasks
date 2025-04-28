@@ -1,6 +1,7 @@
 // ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:nti_flutter_tasks/core/helper/svg_picture_custom.dart';
 import 'package:nti_flutter_tasks/core/utils/app_assets.dart';
 import 'package:nti_flutter_tasks/core/utils/app_colors.dart';
 
@@ -38,8 +39,10 @@ class TextFormPasswordField {
           ),
           suffixIcon: IconButton(
             onPressed: onTap,
-            icon: SvgPicture.asset(
-              isPasswordVisible ? AppAssets.unlock : AppAssets.lock,
+            icon: setSvgPicture(
+              assetPath: isPasswordVisible
+                  ? AppAssets.unlock
+                  : AppAssets.lock,
               width: 24,
               height: 24,
             ),
@@ -53,3 +56,4 @@ class TextFormPasswordField {
     );
   }
 }
+

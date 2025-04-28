@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../core/utils/app_assets.dart';
 import '../../../core/widgets/build_profile_header.dart';
 import '../../../core/widgets/custom_profile_container.dart';
-import '../../Change Password Screen/view/change_password_view.dart';
-import '../../Setting Screen/view/setting_view.dart';
+import '../../change_password_screen/view/change_password_view.dart';
+import '../../setting_screen/view/setting_view.dart';
 import 'update_profile_view.dart';
 
 class ProfileScreen extends StatefulWidget {

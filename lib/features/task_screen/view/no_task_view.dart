@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../Task%20Screen/view/widgets/task_content.dart';
 
 import '../../../core/utils/app_colors.dart';
 import '../../../core/widgets/build_profile_header.dart';
+import 'widgets/task_content.dart';
 
 class TaskScreen extends StatelessWidget {
   const TaskScreen({super.key});

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'core/utils/app_strings.dart';
+import 'features/auth/view/register_view.dart';
+import 'features/home_screen/view/home_no_task_view.dart';
+import 'features/home_screen/view/home_tasks_view.dart';
 
 import 'core/utils/app_colors.dart';
-import 'core/utils/constant.dart';
-import 'features/OnBoarding%20Screens/view/splash_view.dart';
+
+import 'features/on_boarding_screens/view/splash_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,13 +20,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: AppConstant.appTitle,
+      title: AppStrings.appTitle,
       theme: ThemeData(
         scaffoldBackgroundColor: AppColors.scaffoldBackground,
-        fontFamily: AppConstant.fontFamily,
+        fontFamily: AppStrings.fontFamily,
       ),
 
-      home: SplashScreen(),
+      home: HomeTaskContentScreen(),
     );
   }
 }

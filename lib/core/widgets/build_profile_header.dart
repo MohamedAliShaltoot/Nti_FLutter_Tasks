@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import '../../features/Add%20Task%20Screen/view/add_task_view.dart';
-import '../../features/Profile Screen/view/profile_view.dart';
+
+import '../../features/profile_screen/view/profile_view.dart';
 import '../utils/app_assets.dart';
 import '../utils/app_colors.dart';
 
@@ -10,7 +9,7 @@ Widget buildProfileHeader({
   required BuildContext context,
 }) {
   return Padding(
-    padding: const EdgeInsets.all(20.0),
+    padding: const EdgeInsets.all(10.0),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -26,8 +25,8 @@ Widget buildProfileHeader({
             children: [
               // Profile picture with flag
               Container(
-                width: 75,
-                height: 75,
+                width: 65,
+                height: 65,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: Border.all(color: Colors.grey[300]!),
@@ -64,58 +63,28 @@ Widget buildProfileHeader({
         ),
 
         //Right side: Add button
-        isSettings
-            ? Container()
-            : Container(
-              width: 40,
-              height: 40,
-              decoration: BoxDecoration(shape: BoxShape.circle),
-              child: IconButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => AddTaskView()),
-                  );
-                },
-                icon: SvgPicture.asset(
-                  AppAssets.plusImage,
-                  width: 35,
-                  height: 35,
-                ),
-                color: AppColors.black,
-              ),
-            ),
+        // isSettings
+        //     ? Container()
+        //     : Container(
+        //       width: 40,
+        //       height: 40,
+        //       decoration: BoxDecoration(shape: BoxShape.circle),
+        //       child: IconButton(
+        //         onPressed: () {
+        //           Navigator.push(
+        //             context,
+        //             MaterialPageRoute(builder: (context) => AddTaskView()),
+        //           );
+        //         },
+        //         icon: SvgPicture.asset(
+        //           AppAssets.plusImage,
+        //           width: 35,
+        //           height: 35,
+        //         ),
+        //         color: AppColors.black,
+        //       ),
+        //     ),
       ],
     ),
   );
 }
-
-
-  /*
-   ListTile(
-            leading: CircleAvatar(
-              maxRadius: 60,
-
-              backgroundImage: AssetImage(AppAssets.myProfileImage),
-            ),
-            title: Text(
-              "Hello!",
-              style: TextStyle(
-                color: AppColors.black,
-                fontWeight: FontWeight.w300,
-              ),
-            ),
-            subtitle: Text(
-              "Mohamed Ali",
-              style: TextStyle(
-                color: AppColors.black,
-                fontWeight: FontWeight.w300,
-              ),
-            ),
-            trailing: IconButton(
-              onPressed: () {},
-              icon: SvgPicture.asset(AppAssets.plusImage),
-              color: AppColors.black,
-            ),
-          ),
-  */

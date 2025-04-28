@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import '../helper/svg_picture_custom.dart';
 
 import '../utils/app_assets.dart';
 import '../utils/app_colors.dart';
@@ -29,10 +30,7 @@ class TextUserNameFormField {
           filled: true,
           prefixIcon: IconButton(
             onPressed: () {},
-            icon: SvgPicture.asset(
-              AppAssets.profile,
-              // fit: BoxFit.contain,
-            ),
+            icon:setSvgPicture(assetPath: AppAssets.profile),
           ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(radius),

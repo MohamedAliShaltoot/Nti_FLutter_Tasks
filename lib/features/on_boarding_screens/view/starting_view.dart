@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../core/utils/app_assets.dart';
 import '../../../core/utils/app_colors.dart';
 import '../../../core/widgets/customElevatedButton.dart';
-import '../../Auth/view/register_view.dart';
+import '../../auth/view/register_view.dart';
 
 class StartingScreen extends StatelessWidget {
   const StartingScreen({super.key});
@@ -17,6 +17,7 @@ class StartingScreen extends StatelessWidget {
         child: Column(
           children: [
             SizedBox(height: height * 0.11),
+            
             Image.asset(AppAssets.welcomeImage,width: 290,height: 300,), 
             SizedBox(height: 20),
             Text(

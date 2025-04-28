@@ -1,9 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'starting_view.dart';
+
 import '../../../core/utils/app_assets.dart';
 import '../../../core/utils/app_colors.dart';
+import 'starting_view.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -34,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(AppAssets.rightIconSplash,width: 334,height: 343.5,), // Your splash image
+              Image.asset(AppAssets.rightIconSplash,width: 334,height: 343.5,), 
               SizedBox(height: 20), // Space between image and text
               Text(
                 'TODO',

@@ -1,7 +1,9 @@
-import 'package:flutter/foundation.dart';
+
 import 'package:flutter/material.dart';
-import '../../HomeScreen/view/home_view.dart';
-import '../../Task%20Screen/view/no_task_view.dart';
+import '../../../core/utils/app_assets.dart';
+import '../../task_screen/view/no_task_view.dart';
+
+
 import 'login_view.dart';
 import '../../../core/utils/app_colors.dart';
 import '../../../core/widgets/customElevatedButton.dart';
@@ -27,6 +29,7 @@ class _LoginScreenState extends State<RegisterScreen> {
   bool isChecked = false;
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       resizeToAvoidBottomInset: true,
       
@@ -39,7 +42,7 @@ class _LoginScreenState extends State<RegisterScreen> {
                 height: 310,
                 width: double.infinity,
                 child: Image.asset(
-                  "assets/images/palsteen.png",
+                  AppAssets.myProfileImage,
                   fit: BoxFit.fill,
                 ),
               ),
