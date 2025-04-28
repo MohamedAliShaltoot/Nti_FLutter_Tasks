@@ -22,7 +22,9 @@ class HomeTaskContentScreen extends StatelessWidget {
         tooltip: "Add Task",
         shape: const CircleBorder(),
         backgroundColor: AppColors.primary,
-        onPressed: () {},
+        onPressed: () {
+          
+        },
         child: setSvgPicture(
           assetPath: AppAssets.paperPlusIcon,
           width: 24,
