@@ -32,7 +32,7 @@
 ## 🔥 Screenshots
 
 
-| App Icon|
+| App Icon
 |<p align="center">
   <img src="assets\images\right_icon_splash.png" width="350" alt="Home Screen">
   <br>
