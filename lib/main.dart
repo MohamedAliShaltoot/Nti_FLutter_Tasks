@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'core/utils/app_strings.dart';
-import 'features/auth/view/register_view.dart';
-import 'features/home_screen/view/home_no_task_view.dart';
-import 'features/home_screen/view/home_tasks_view.dart';
 
 import 'core/utils/app_colors.dart';
-
-import 'features/on_boarding_screens/view/splash_view.dart';
+import 'core/utils/app_strings.dart';
+import 'features/home_screen/view/home_tasks_view.dart';
 
 void main() {
   runApp(const MyApp());

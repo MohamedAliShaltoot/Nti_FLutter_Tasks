@@ -1,15 +1,14 @@
 
 import 'package:flutter/material.dart';
+
 import '../../../core/utils/app_assets.dart';
-import '../../task_screen/view/no_task_view.dart';
-
-
-import 'login_view.dart';
 import '../../../core/utils/app_colors.dart';
 import '../../../core/widgets/customElevatedButton.dart';
 import '../../../core/widgets/customTextFormField.dart';
 import '../../../core/widgets/customTextFormUserName.dart';
 import '../../../core/widgets/lastStringLine.dart';
+import '../../task_screen/view/no_task_view.dart';
+import 'login_view.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});

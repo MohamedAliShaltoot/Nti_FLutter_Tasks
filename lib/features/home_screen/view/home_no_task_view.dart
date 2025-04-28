@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+
 import '../../../core/helper/svg_picture_custom.dart';
-import '../../../core/utils/app_strings.dart';
-import '../../../core/widgets/build_profile_header.dart';
-import '../../add_task_screen/view/add_task_view.dart';
 import '../../../core/utils/app_assets.dart';
 import '../../../core/utils/app_colors.dart';
+import '../../../core/utils/app_strings.dart';
+import '../../../core/widgets/build_profile_header.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

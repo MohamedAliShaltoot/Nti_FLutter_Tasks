@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+
 import '../../../../core/helper/svg_picture_custom.dart';
-import '../../../../core/utils/app_assets.dart';
-import '../../../../core/utils/app_colors.dart';
 
 Widget customCategoryContainer({
   required String title,
