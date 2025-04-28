@@ -8,4 +8,7 @@ Tasks App from NTI_Traning
   
 </p>
 
+![App Screenshot](assets\images\home_screen.png)
+![App Screenshot](assets\images\right_icon_splash.png)
+
 
