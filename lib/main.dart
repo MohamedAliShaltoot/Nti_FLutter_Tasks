@@ -6,7 +6,6 @@ import 'package:nti_flutter_tasks/features/home_screen/view/home_tasks_view.dart
 import 'core/utils/app_colors.dart';
 import 'core/utils/app_strings.dart';
 
-
 void main() {
   runApp(const MyApp());
 }
