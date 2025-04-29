@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nti_flutter_tasks/features/add_task_screen/view/add_task_view.dart';
+import 'package:nti_flutter_tasks/features/home_screen/view/widgets/custom_floating_button.dart';
 
 import '../../../core/helper/svg_picture_custom.dart';
 import '../../../core/utils/app_assets.dart';
@@ -18,26 +19,10 @@ class HomeTaskContentScreen extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        autofocus: true,
-        tooltip: "Add Task",
-        shape: const CircleBorder(),
-        backgroundColor: AppColors.primary,
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) {
-                return AddTaskView();
-              },
-            ),
-          );
-        },
-        child: setSvgPicture(
-          assetPath: AppAssets.paperPlusIcon,
-          width: 24,
-          height: 24,
-        ),
+      floatingActionButton: customFloatingButton(
+        onPress: () {},
+        pathIcon: AppAssets.paperPlusIcon,
+        toolTip: 'add tasks',
       ),
       body: SafeArea(
         child: Padding(
@@ -172,8 +157,6 @@ class HomeTaskContentScreen extends StatelessWidget {
                 textNumberColor: AppColors.white,
                 leadingIconBGC: AppColors.black,
                 traillingIconBGC: AppColors.black,
-
-
               ),
             ],
           ),
