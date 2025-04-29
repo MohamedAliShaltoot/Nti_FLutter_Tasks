@@ -10,13 +10,13 @@ Widget customCategoryContainer({
   required Color iconBGC,
   required Color titleBGC,
   required Color subTitleBGC,
-  double height =26,
+  double height = 26,
   double width = 26,
   fontWeight = FontWeight.w300,
 }) {
   return Container(
-    width: 245,
-    height: 90,
+    width: 249,
+    height: 100,
     padding: const EdgeInsets.all(6),
     margin: EdgeInsetsDirectional.all(10),
     decoration: BoxDecoration(
@@ -27,7 +27,7 @@ Widget customCategoryContainer({
       children: [
         // Content (title and subtitle)
         Positioned(
-          top: 4,
+          top: 1,
           left: 10,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,7 +40,7 @@ Widget customCategoryContainer({
                   fontWeight: FontWeight.w300,
                 ),
               ),
-              SizedBox(height: 8),
+              SizedBox(height: 7),
               Text(
                 subTitle,
                 style: TextStyle(
@@ -55,22 +55,20 @@ Widget customCategoryContainer({
 
         // Icon in top-left
         Positioned(
-          top: 8,
+          top: 1,
           left: 200,
           child: Container(
-           // padding: const EdgeInsets.all(4),
-            width:30,
+            // padding: const EdgeInsets.all(4),
+            width: 30,
             height: 30,
             decoration: BoxDecoration(
               color: iconBGC,
               borderRadius: BorderRadius.circular(5),
-             
             ),
             child: setSvgPicture(
               assetPath: iconPath,
               width: width,
               height: height,
-              
             ),
           ),
         ),

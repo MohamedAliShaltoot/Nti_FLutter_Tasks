@@ -9,10 +9,11 @@ Widget customGroupTask({
   required Color textNumberColor,
   required Color leadingIconBGC,
   required Color traillingIconBGC,
-
-  double height = 55,
+  required int number,
+  double height = 69,
 }) {
   return Container(
+    alignment: Alignment.center,
     height: height,
     decoration: BoxDecoration(
       color: AppColors.white,
@@ -26,7 +27,7 @@ Widget customGroupTask({
         ),
       ],
     ),
-    margin: EdgeInsetsDirectional.symmetric(horizontal: 22, vertical: 5),
+    margin: EdgeInsetsDirectional.symmetric(horizontal: 22, vertical: 10),
     child: ListTile(
       leading: Container(
         // padding: const EdgeInsets.all(4),
@@ -41,8 +42,8 @@ Widget customGroupTask({
       title: Text(title),
       trailing: Container(
         alignment: Alignment.center,
-        width: 20,
-        height: 20,
+        width: 25,
+        height: 25,
         decoration: BoxDecoration(
           color: traillingIconBGC,
           borderRadius: BorderRadius.circular(5),
@@ -50,7 +51,7 @@ Widget customGroupTask({
         ),
 
         child: Text(
-          "5",
+          number.toString(),
           style: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w500,

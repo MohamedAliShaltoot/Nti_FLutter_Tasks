@@ -66,6 +66,8 @@ Widget customTaskContentContainer({
           bottom: 18,
           right: 22,
           child: Container(
+            width: 100,
+            height: 50,
             alignment: Alignment.center,
             decoration: BoxDecoration(
               color: AppColors.white,
@@ -76,7 +78,7 @@ Widget customTaskContentContainer({
               style: TextStyle(
                 color: AppColors.primary,
                 fontWeight: FontWeight.w400,
-                fontSize: 14,
+                fontSize: 18,
               ),
             ),
           ),
