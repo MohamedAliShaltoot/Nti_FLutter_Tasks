@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:nti_flutter_tasks/features/home_screen/view/home_no_task_view.dart';
 import 'package:nti_flutter_tasks/features/home_screen/view/home_tasks_view.dart';
+import 'package:nti_flutter_tasks/features/home_screen/view/to_days_task_view.dart';
 
 import 'core/utils/app_colors.dart';
 import 'core/utils/app_strings.dart';
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
         fontFamily: AppStrings.fontFamily,
       ),
 
-      home: HomeTaskContentScreen(),
+      home: ToDaysTaskView(),
     );
   }
 }
