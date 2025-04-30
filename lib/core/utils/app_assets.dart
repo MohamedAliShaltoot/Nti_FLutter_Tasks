@@ -22,6 +22,8 @@ abstract class AppAssets {
   static const String homePinkIcon = "${basePath}home_pink.svg";
   static const String searchIcon = "${basePath}search_icon.svg";
   static const String filterkIcon = "${basePath}filter_icon.svg";
-  
+  static const String calenderIcon = "${basePath}calendar_icon.svg";
+  static const String deleteIcon = "${basePath}delete_icon.svg";
 
+  static const String dropDownIcon = "${basePath}drop_down_icon.svg";
 }
