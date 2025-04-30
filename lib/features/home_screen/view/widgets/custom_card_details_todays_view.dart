@@ -11,15 +11,15 @@ Widget customCardDetailsTodaysView({
   required Color textBGC,
 }) {
   return Padding(
-    padding: const EdgeInsets.only(bottom: 10),
+    padding: const EdgeInsets.only(bottom: 17),
     child: Container(
       padding: const EdgeInsets.all(4),
       decoration: BoxDecoration(
         color: AppColors.white,
         borderRadius: BorderRadius.circular(20),
       ),
-      width: 334,
-      height: 100,
+      width: 364,
+      height: 115,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,13 +55,13 @@ Widget customCardDetailsTodaysView({
                 Text(
                   title,
                   style: const TextStyle(
-                    fontSize: 14.5,
+                    fontSize: 15,
                     fontWeight: FontWeight.w500,
                   ),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
-                const SizedBox(height: 12),
+                const SizedBox(height: 20),
                 Padding(
                   padding: const EdgeInsets.only(right: 5),
                   child: Row(
@@ -70,8 +70,8 @@ Widget customCardDetailsTodaysView({
                     children: [
                       Container(
                         alignment: Alignment.center,
-                        width: 90,
-                        height: 20,
+                        width: 99,
+                        height: 25,
                         decoration: BoxDecoration(
                           color: textBGC,
                           borderRadius: BorderRadius.circular(12),

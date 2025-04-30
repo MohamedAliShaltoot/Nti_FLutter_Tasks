@@ -26,9 +26,9 @@ class _SettingScreenState extends State<SettingScreen> {
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: SvgPicture.asset(AppAssets.goBackIcon),
+          icon: SvgPicture.asset(AppAssets.goBackIcon, width: 28, height: 28),
         ),
-        title: Text("Settings", style: TextStyle(fontWeight: FontWeight.w300)),
+        title: Text("Settings", style: TextStyle(fontWeight: FontWeight.w400)),
         centerTitle: true,
       ),
       body: Column(
@@ -45,7 +45,7 @@ class _SettingScreenState extends State<SettingScreen> {
 
                 SizedBox(width: width * 0.23),
 
-               Container(
+                Container(
                   decoration: BoxDecoration(
                     // No need for border radius here as we'll handle it in the individual containers
                     border: Border.all(color: Colors.transparent),

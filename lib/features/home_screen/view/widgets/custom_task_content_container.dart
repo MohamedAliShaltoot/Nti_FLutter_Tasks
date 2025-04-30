@@ -25,7 +25,7 @@ Widget customTaskContentContainer({
             AppStrings.titleInHomeContainer,
             style: TextStyle(
               color: AppColors.white,
-              fontWeight: FontWeight.w400,
+              fontWeight: FontWeight.w500,
             ),
           ),
         ),
@@ -77,7 +77,7 @@ Widget customTaskContentContainer({
               AppStrings.viewTaskTitle,
               style: TextStyle(
                 color: AppColors.primary,
-                fontWeight: FontWeight.w400,
+                fontWeight: FontWeight.w700,
                 fontSize: 18,
               ),
             ),

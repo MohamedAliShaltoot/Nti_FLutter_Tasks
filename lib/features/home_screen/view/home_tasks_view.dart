@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nti_flutter_tasks/features/add_task_screen/view/add_task_view.dart';
+import 'package:nti_flutter_tasks/features/home_screen/view/to_days_task_view.dart';
 import 'package:nti_flutter_tasks/features/home_screen/view/widgets/custom_floating_button.dart';
 
 import '../../../core/helper/svg_picture_custom.dart';
@@ -20,7 +21,14 @@ class HomeTaskContentScreen extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
       floatingActionButton: customFloatingButton(
-        onPress: () {},
+        onPress: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const ToDaysTaskView(),
+            ),
+          );
+        },
         pathIcon: AppAssets.paperPlusIcon,
         toolTip: 'add tasks',
       ),
