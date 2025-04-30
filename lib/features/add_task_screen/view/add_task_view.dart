@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:nti_flutter_tasks/core/helper/svg_picture_custom.dart';
 import 'package:nti_flutter_tasks/core/widgets/custom_calender_container.dart';
+import 'package:nti_flutter_tasks/features/add_task_screen/view/widgets/custom_drop_down_list.dart';
 
 import '../../../core/utils/app_assets.dart';
 import '../../../core/utils/app_colors.dart';
@@ -103,95 +104,23 @@ class _AddTaskViewState extends State<AddTaskView> {
                 iconEnabledColor: AppColors.primary,
                 value: selectedTaskType,
                 items: [
-                  DropdownMenuItem(
-                    value: 0,
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          child: Container(
-                            width: 28,
-                            height: 28,
-                            // padding: EdgeInsets.only(right: 15),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              color: AppColors.lightPink,
-                            ),
-                            child: setSvgPicture(
-                              assetPath: AppAssets.homePinkIcon,
-                              width: 26,
-                              height: 26,
-                            ),
-                          ),
-                        ),
-                        Text(
-                          "Home",
-                          style: TextStyle(
-                            color: Color.fromARGB(255, 10, 10, 10),
-                          ),
-                        ),
-                      ],
-                    ),
+                  customDropDownList(
+                    iconPath: AppAssets.homePinkIcon,
+                    icontainerIconBGC: AppColors.lightPink,
+                    textType: "Home",
+                    itemValue: 0,
                   ),
-                  DropdownMenuItem(
-                    value: 1,
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          child: Container(
-                            width: 26,
-                            height: 26,
-                            //  padding: EdgeInsets.only(left: 5),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              color: AppColors.primary,
-                            ),
-                            child: setSvgPicture(
-                              assetPath: AppAssets.personalGrayIcon,
-                              width: 26,
-                              height: 26,
-                            ),
-                          ),
-                        ),
-                        Text(
-                          "Personal",
-                          style: TextStyle(
-                            color: Color.fromARGB(255, 10, 10, 10),
-                          ),
-                        ),
-                      ],
-                    ),
+                  customDropDownList(
+                    iconPath: AppAssets.personalGrayIcon,
+                    icontainerIconBGC: AppColors.primary,
+                    textType: "Personal",
+                    itemValue: 1,
                   ),
-                  DropdownMenuItem(
-                    value: 2,
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          child: Container(
-                            width: 26,
-                            height: 26,
-                            // padding: EdgeInsets.only(left: 5),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              color: AppColors.black,
-                            ),
-                            child: setSvgPicture(
-                              assetPath: AppAssets.workShopIcon,
-                              width: 26,
-                              height: 26,
-                            ),
-                          ),
-                        ),
-                        Text(
-                          "Work",
-                          style: TextStyle(
-                            color: Color.fromARGB(255, 10, 10, 10),
-                          ),
-                        ),
-                      ],
-                    ),
+                  customDropDownList(
+                    iconPath: AppAssets.workShopIcon,
+                    icontainerIconBGC: AppColors.black,
+                    textType: "Work",
+                    itemValue: 2,
                   ),
                 ],
                 onChanged: (value) {

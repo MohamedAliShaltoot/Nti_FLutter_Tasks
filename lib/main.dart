@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nti_flutter_tasks/features/add_task_screen/view/add_task_view.dart';
+import 'package:nti_flutter_tasks/features/add_task_screen/view/edit_task_view.dart';
 
 import 'package:nti_flutter_tasks/features/home_screen/view/home_no_task_view.dart';
 import 'package:nti_flutter_tasks/features/home_screen/view/home_tasks_view.dart';
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
         fontFamily: AppStrings.fontFamily,
       ),
 
-      home: AddTaskView(),
+      home: EditTaskView(),
     );
   }
 }

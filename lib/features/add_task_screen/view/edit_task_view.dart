@@ -1,0 +1,206 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:nti_flutter_tasks/core/helper/svg_picture_custom.dart';
+import 'package:nti_flutter_tasks/core/widgets/custom_calender_container.dart';
+import 'package:nti_flutter_tasks/features/add_task_screen/view/widgets/custom_drop_down_list.dart';
+
+import '../../../core/utils/app_assets.dart';
+import '../../../core/utils/app_colors.dart';
+import '../../../core/widgets/customElevatedButton.dart';
+import 'widgets/text_task_content.dart';
+
+class EditTaskView extends StatefulWidget {
+  const EditTaskView({super.key});
+
+  @override
+  State<EditTaskView> createState() => _EditTaskViewState();
+}
+
+class _EditTaskViewState extends State<EditTaskView> {
+  TextEditingController titleController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
+  int selectedTaskType = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      // backgroundColor: AppColors.scaffoldBackground,
+      appBar: AppBar(
+        backgroundColor: AppColors.scaffoldBackground,
+        leading: IconButton(
+          color: AppColors.black,
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: SvgPicture.asset(AppAssets.goBackIcon),
+        ),
+        title: Text("Edit Task", style: TextStyle(fontWeight: FontWeight.w300)),
+        actions: [
+          Padding(
+            padding: const EdgeInsetsDirectional.only(end: 20),
+            child: Container(
+              padding: EdgeInsets.only(right: 10),
+              width: 120,
+              height: 40,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                // ignore: deprecated_member_use
+                color: AppColors.red,
+              ),
+              child: Row(
+                children: [
+                  setSvgPicture(
+                    assetPath: AppAssets.deleteIcon,
+                    width: 20,
+                    height: 20,
+                  ),
+                  SizedBox(width: 10),
+                  Text(
+                    "Delete",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w300,
+                      color: AppColors.white,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+        centerTitle: true,
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(height: 26),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 27),
+              child: Row(
+                children: [
+                  Container(
+                    alignment: Alignment.center,
+                    width: 70,
+                    height: 70,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(70), //
+                      // shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 4,
+                          spreadRadius: 0,
+                          offset: Offset(0, 2),
+                          color: Color.fromARGB(255, 160, 160, 162),
+                        ),
+                      ],
+                      image: DecorationImage(
+                        image: AssetImage(AppAssets.myProfileImage),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+
+                  SizedBox(width: 10),
+
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("In Progress"),
+                      SizedBox(height: 5),
+                      Text("Believe you can, \n and you're halfway there."),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 29),
+            Padding(
+              padding: const EdgeInsets.only(left: 27, right: 17),
+              child: DropdownButtonFormField(
+                icon: setSvgPicture(
+                  assetPath: AppAssets.dropDownIcon,
+                  width: 24,
+                  height: 24,
+                ),
+                decoration: InputDecoration(
+                  fillColor: AppColors.white,
+                  filled: true,
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15),
+                    borderSide: BorderSide(color: AppColors.borderColor),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: AppColors.primary,
+                      width: 1.2,
+                    ),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15),
+                    borderSide: BorderSide(
+                      width: 1,
+                      color: Color.fromARGB(255, 12, 13, 13),
+                    ),
+                  ),
+                ),
+
+                dropdownColor: const Color(0xfff3f5f4),
+
+                iconEnabledColor: AppColors.primary,
+                value: selectedTaskType,
+                items: [
+                  customDropDownList(
+                    iconPath: AppAssets.homePinkIcon,
+                    icontainerIconBGC: AppColors.lightPink,
+                    textType: "Home",
+                    itemValue: 0,
+                  ),
+                  customDropDownList(
+                    iconPath: AppAssets.personalGrayIcon,
+                    icontainerIconBGC: AppColors.primary,
+                    textType: "Personal",
+                    itemValue: 1,
+                  ),
+                  customDropDownList(
+                    iconPath: AppAssets.workShopIcon,
+                    icontainerIconBGC: AppColors.black,
+                    textType: "Work",
+                    itemValue: 2,
+                  ),
+                ],
+                onChanged: (value) {
+                  // Handle gender selection
+                  setState(() {});
+                  selectedTaskType = value!;
+                },
+              ),
+            ),
+            SizedBox(height: 17),
+            textTaskContent(content: "Title"),
+
+            SizedBox(height: 17),
+            textTaskContent(content: "Description"),
+            SizedBox(height: 17),
+            customCalenderContainer(),
+            SizedBox(height: 37),
+            Customelevatedbutton.getElevatedButton(
+              onTap: () {},
+              title: "Mark as Done",
+              fontWeight: FontWeight.w300,
+              fontSize: 19,
+            ),
+            SizedBox(height: 17),
+            CustomOutLinedelevatedbutton.getElevatedButton(
+              onTap: () {},
+              title: "Update",
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
