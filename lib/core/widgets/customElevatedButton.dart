@@ -8,23 +8,53 @@ class Customelevatedbutton {
     required String title,
     FontWeight fontWeight = FontWeight.w600,
 
-      double fontSize=22 ,
-
-
-
+    double fontSize = 22,
   }) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           alignment: AlignmentDirectional.center,
-          backgroundColor: const Color(0xff149954),
+          backgroundColor: AppColors.primary,
           fixedSize: const Size(381, 48),
           foregroundColor: Colors.white,
-          elevation:20,
+          elevation: 20,
           shadowColor: AppColors.primary,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(14),
+          ),
+        ),
+        onPressed: onTap,
+        child: Text(
+          title,
+          style: TextStyle(fontSize: fontSize, fontWeight: fontWeight),
+        ),
+      ),
+    );
+  }
+}
+
+class CustomOutLinedelevatedbutton {
+  static Widget getElevatedButton({
+    required void Function() onTap,
+    required String title,
+    FontWeight fontWeight = FontWeight.w400,
+
+    double fontSize = 19,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          alignment: AlignmentDirectional.center,
+          backgroundColor: AppColors.white,
+          fixedSize: const Size(381, 48),
+          foregroundColor: AppColors.primary,
+          elevation: 20,
+          shadowColor: AppColors.primary,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(14),
+            side: BorderSide(color: AppColors.primary),
           ),
         ),
         onPressed: onTap,
