@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:nti_flutter_tasks/core/helper/svg_picture_custom.dart';
 import 'package:nti_flutter_tasks/core/utils/app_assets.dart';
 import 'package:nti_flutter_tasks/core/utils/app_colors.dart';
+import 'package:nti_flutter_tasks/features/home_screen/data/filter_screen.dart';
 import 'package:nti_flutter_tasks/features/home_screen/view/widgets/custom_card_details_todays_view.dart';
 import 'package:nti_flutter_tasks/features/home_screen/view/widgets/custom_floating_button.dart';
 
@@ -13,21 +14,26 @@ class ToDaysTaskView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: customFloatingButton(
-        onPress: () {},
+        onPress: () {
+          showFilterModal(context);
+        },
         pathIcon: AppAssets.filterkIcon,
         toolTip: 'filter tasks',
       ),
-      
+
       appBar: AppBar(
         backgroundColor: AppColors.scaffoldBackground,
         leading: setSvgPicture(
+          onPressed: () {
+            Navigator.pop(context);
+          },
           assetPath: AppAssets.goBackIcon,
           width: 24,
           height: 24,
         ),
         title: Text(
           "Tasks",
-          style: TextStyle(fontWeight: FontWeight.w300, fontSize: 19),
+          style: TextStyle(fontWeight: FontWeight.w500, fontSize: 19),
         ),
         centerTitle: true,
       ),
@@ -42,6 +48,13 @@ class ToDaysTaskView extends StatelessWidget {
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(6),
                       borderSide: BorderSide(color: AppColors.white),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(6),
+                      borderSide: BorderSide(
+                        color: AppColors.primary,
+                        width: 3,
+                      ),
                     ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(6),
@@ -73,7 +86,7 @@ class ToDaysTaskView extends StatelessWidget {
                         Text(
                           "Results",
                           style: TextStyle(
-                            fontSize: 13,
+                            fontSize: 22,
                             fontWeight: FontWeight.w300,
                             color: AppColors.black,
                           ),
@@ -81,6 +94,7 @@ class ToDaysTaskView extends StatelessWidget {
                         SizedBox(width: 10),
                         Container(
                           alignment: Alignment.center,
+                          padding: EdgeInsets.only(top: 0.01),
                           width: 20,
                           height: 20,
                           decoration: BoxDecoration(

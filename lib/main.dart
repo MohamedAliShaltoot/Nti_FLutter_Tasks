@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         fontFamily: AppStrings.fontFamily,
       ),
 
-      home: ToDaysTaskView(),
+      home: HomeTaskContentScreen(),
     );
   }
 }
