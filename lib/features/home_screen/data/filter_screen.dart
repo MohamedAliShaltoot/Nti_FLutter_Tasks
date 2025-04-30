@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:nti_flutter_tasks/core/utils/app_colors.dart';
+import 'package:nti_flutter_tasks/core/widgets/custom_calender_container.dart';
 
 void showFilterModal(BuildContext context) {
   print("Showing filter modal"); // Debug print
@@ -97,31 +98,32 @@ class _TaskFilterModalState extends State<TaskFilterModal> {
               SizedBox(height: 24.0),
 
               // Date and Time Selection
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 16.0,
-                  horizontal: 12.0,
-                ),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey.shade300),
-                  borderRadius: BorderRadius.circular(12.0),
-                ),
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.calendar_today,
-                      color: AppColors.primary,
-                      size: 20,
-                    ),
-                    const SizedBox(width: 8.0),
-                    Text('30 June, 2022', style: TextStyle(fontSize: 16.0)),
-                    const SizedBox(width: 8.0),
-                    // Text('•', style: TextStyle(fontSize: 16.0)),
-                    const SizedBox(width: 8.0),
-                    Text('10:00 pm', style: TextStyle(fontSize: 16.0)),
-                  ],
-                ),
-              ),
+              // Container(
+              //   padding: const EdgeInsets.symmetric(
+              //     vertical: 16.0,
+              //     horizontal: 12.0,
+              //   ),
+              //   decoration: BoxDecoration(
+              //     border: Border.all(color: Colors.grey.shade300),
+              //     borderRadius: BorderRadius.circular(12.0),
+              //   ),
+              //   child: Row(
+              //     children: [
+              //       Icon(
+              //         Icons.calendar_today,
+              //         color: AppColors.primary,
+              //         size: 20,
+              //       ),
+              //       const SizedBox(width: 8.0),
+              //       Text('30 June, 2022', style: TextStyle(fontSize: 16.0)),
+              //       const SizedBox(width: 8.0),
+              //       // Text('•', style: TextStyle(fontSize: 16.0)),
+              //       const SizedBox(width: 8.0),
+              //       Text('10:00 pm', style: TextStyle(fontSize: 16.0)),
+              //     ],
+              //   ),
+              // ),
+              customCalenderContainer(),
               SizedBox(height: 24.0),
 
               // Filter Button
