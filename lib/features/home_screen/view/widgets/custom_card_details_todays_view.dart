@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:nti_flutter_tasks/core/helper/svg_picture_custom.dart';
-import 'package:nti_flutter_tasks/core/utils/app_assets.dart';
-import 'package:nti_flutter_tasks/core/utils/app_colors.dart';
+
+import '../../../../core/helper/svg_picture_custom.dart';
+import '../../../../core/utils/app_assets.dart';
+import '../../../../core/utils/app_colors.dart';
 
 Widget customCardDetailsTodaysView({
   required String title,

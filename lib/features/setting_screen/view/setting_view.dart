@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
+import '../../../core/translation/translation_helper.dart';
+import '../../../core/translation/translation_keys.dart';
 import '../../../core/utils/app_assets.dart';
 import '../../../core/utils/app_colors.dart';
 import '../../../core/widgets/custom_language_container.dart';
@@ -28,7 +31,8 @@ class _SettingScreenState extends State<SettingScreen> {
           },
           icon: SvgPicture.asset(AppAssets.goBackIcon, width: 28, height: 28),
         ),
-        title: Text("Settings", style: TextStyle(fontWeight: FontWeight.w400)),
+        title: Text(
+          TranslationKeys.settingsTitle.tr, style: TextStyle(fontWeight: FontWeight.w400)),
         centerTitle: true,
       ),
       body: Column(
@@ -39,7 +43,7 @@ class _SettingScreenState extends State<SettingScreen> {
             child: Row(
               children: [
                 Text(
-                  "Language",
+                 TranslationKeys.languageTitle.tr,
                   style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
                 ),
 
@@ -52,21 +56,32 @@ class _SettingScreenState extends State<SettingScreen> {
                   ),
                   child: Row(
                     children: [
-                      CustomLanguageContainer.getCustomLanguageContainer(
-                        backgroundColor: Color(0xffD9D9D9),
-                        text: "AR",
-                        textColor: AppColors.black,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(5),
-                          bottomLeft: Radius.circular(5),
+                      GestureDetector(
+                        onTap: () {
+                         
+                          TranslationHelper.changeLanguage(true);
+                        },
+                        child: CustomLanguageContainer.getCustomLanguageContainer(
+                          backgroundColor: Color(0xffD9D9D9),
+                          text: TranslationKeys.arabicTitle.tr,
+                          textColor: AppColors.black,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(5),
+                            bottomLeft: Radius.circular(5),
+                          ),
                         ),
                       ),
-                      CustomLanguageContainer.getCustomLanguageContainer(
-                        backgroundColor: AppColors.primary,
-                        text: "En",
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(5),
-                          bottomRight: Radius.circular(5),
+                      GestureDetector(
+                          onTap: () {
+                          TranslationHelper.changeLanguage(false);
+                        },
+                        child: CustomLanguageContainer.getCustomLanguageContainer(
+                          backgroundColor: AppColors.primary,
+                          text: TranslationKeys.englishTitle.tr,
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(5),
+                            bottomRight: Radius.circular(5),
+                          ),
                         ),
                       ),
                     ],

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-import 'package:nti_flutter_tasks/core/helper/svg_picture_custom.dart';
-import 'package:nti_flutter_tasks/core/utils/app_assets.dart';
-import 'package:nti_flutter_tasks/core/utils/app_colors.dart';
-import 'package:nti_flutter_tasks/features/home_screen/data/filter_screen.dart';
-import 'package:nti_flutter_tasks/features/home_screen/view/widgets/custom_card_details_todays_view.dart';
-import 'package:nti_flutter_tasks/features/home_screen/view/widgets/custom_floating_button.dart';
+import '../../../core/helper/svg_picture_custom.dart';
+import '../../../core/translation/translation_keys.dart';
+import '../../../core/utils/app_assets.dart';
+import '../../../core/utils/app_colors.dart';
+import '../data/filter_screen.dart';
+import 'widgets/custom_card_details_todays_view.dart';
+import 'widgets/custom_floating_button.dart';
 
 class ToDaysTaskView extends StatelessWidget {
   const ToDaysTaskView({super.key});
@@ -18,7 +20,7 @@ class ToDaysTaskView extends StatelessWidget {
           showFilterModal(context);
         },
         pathIcon: AppAssets.filterkIcon,
-        toolTip: 'filter tasks',
+        toolTip: TranslationKeys.filterTaskTitle.tr,
       ),
 
       appBar: AppBar(
@@ -32,7 +34,7 @@ class ToDaysTaskView extends StatelessWidget {
           height: 24,
         ),
         title: Text(
-          "Tasks",
+         TranslationKeys.taskAppBarTitle.tr,
           style: TextStyle(fontWeight: FontWeight.w500, fontSize: 19),
         ),
         centerTitle: true,
@@ -61,7 +63,7 @@ class ToDaysTaskView extends StatelessWidget {
                     ),
                     fillColor: AppColors.white,
                     filled: true,
-                    hintText: "Search... ",
+                    hintText: TranslationKeys.searchTitle.tr,
                     hintStyle: const TextStyle(
                       color: AppColors.gray,
                       fontWeight: FontWeight.w200,
@@ -84,7 +86,7 @@ class ToDaysTaskView extends StatelessWidget {
                     child: Row(
                       children: [
                         Text(
-                          "Results",
+                          TranslationKeys.resultTitle.tr,
                           style: TextStyle(
                             fontSize: 22,
                             fontWeight: FontWeight.w300,

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:nti_flutter_tasks/features/home_screen/view/home_no_task_view.dart';
+import 'package:get/get.dart';
 
+import '../../../core/translation/translation_keys.dart';
 import '../../../core/utils/app_assets.dart';
 import '../../../core/utils/app_colors.dart';
 import '../../../core/widgets/customElevatedButton.dart';
 import '../../../core/widgets/customTextFormField.dart';
 import '../../../core/widgets/customTextFormUserName.dart';
 import '../../../core/widgets/lastStringLine.dart';
-
+import '../../home_screen/view/home_no_task_view.dart';
 import 'login_view.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -37,10 +38,13 @@ class _LoginScreenState extends State<RegisterScreen> {
           child: Column(
             children: [
               SizedBox(
-                height: 310,
-                width: double.infinity,
-                child: Image.asset(AppAssets.myProfileImage, fit: BoxFit.fill),
-              ),
+                      height: 375,
+                      width: double.infinity,
+                      child: Image.asset(
+                        AppAssets.myProfileImage,
+                        fit: BoxFit.fill,
+                      ),
+                    ),
               const SizedBox(height: 23),
               TextUserNameFormField.getTextFormField(
                 emailController: emailController,
@@ -52,7 +56,7 @@ class _LoginScreenState extends State<RegisterScreen> {
                   }
                   return null;
                 },
-                hintText: "Username",
+                hintText: TranslationKeys.userNameTitle.tr,
               ),
 
               const SizedBox(height: 23),
@@ -64,7 +68,7 @@ class _LoginScreenState extends State<RegisterScreen> {
                     isPasswordVisible = !isPasswordVisible;
                   });
                 },
-                hintText: "Password",
+                hintText: TranslationKeys.passWordTitle.tr,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return "Password cannot be empty";
@@ -83,7 +87,7 @@ class _LoginScreenState extends State<RegisterScreen> {
                     isConfirmPasswordVisible = !isConfirmPasswordVisible;
                   });
                 },
-                hintText: "Confirm Password",
+                hintText:TranslationKeys.confirmPassWordTitle.tr,
                 validator: (value) {
                   if (value == null ||
                       value.isEmpty ||
@@ -111,8 +115,8 @@ class _LoginScreenState extends State<RegisterScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
-                          "Remember me?",
+                         Text(
+                         TranslationKeys.rememberMeTitle.tr,
                           style: TextStyle(fontSize: 18),
                         ),
                         Checkbox(
@@ -211,7 +215,7 @@ class _LoginScreenState extends State<RegisterScreen> {
                     MaterialPageRoute(builder: (context) => HomeScreen()),
                   );
                 },
-                title: "Register",
+                title: TranslationKeys.register.tr,
                 fontWeight: FontWeight.w300,
               ),
 
@@ -223,8 +227,8 @@ class _LoginScreenState extends State<RegisterScreen> {
                     MaterialPageRoute(builder: (context) => LoginScreen()),
                   );
                 },
-                text1: "Already Have An Account?",
-                text2: "Login",
+                text1: TranslationKeys.alreadyHaveAccountTitle.tr,
+                text2: TranslationKeys.login.tr,
               ),
             ],
           ),

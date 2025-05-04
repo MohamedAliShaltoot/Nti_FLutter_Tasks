@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:nti_flutter_tasks/core/helper/svg_picture_custom.dart';
-import 'package:nti_flutter_tasks/core/utils/app_colors.dart';
+
+import '../../../../core/helper/svg_picture_custom.dart';
+import '../../../../core/utils/app_colors.dart';
 
 Widget? customFloatingButton({
   required VoidCallback onPress,

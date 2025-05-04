@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/get_utils.dart';
 
+import '../../../../core/translation/translation_keys.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_strings.dart';
 
@@ -22,7 +24,7 @@ Widget customTaskContentContainer({
           top: 18,
           left: 22,
           child: Text(
-            AppStrings.titleInHomeContainer,
+           TranslationKeys.titleInHomeContainer.tr,
             style: TextStyle(
               color: AppColors.white,
               fontWeight: FontWeight.w500,
@@ -74,7 +76,7 @@ Widget customTaskContentContainer({
               borderRadius: BorderRadius.circular(14),
             ),
             child: Text(
-              AppStrings.viewTaskTitle,
+              TranslationKeys.viewTaskTitle.tr,
               style: TextStyle(
                 color: AppColors.primary,
                 fontWeight: FontWeight.w700,

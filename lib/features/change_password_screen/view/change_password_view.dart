@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
+import '../../../core/translation/translation_keys.dart';
 import '../../../core/utils/app_assets.dart';
 import '../../../core/widgets/customElevatedButton.dart';
 import '../../../core/widgets/customTextFormField.dart';
@@ -48,7 +50,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   }
                   return null;
                 },
-                hintText: "Old Password",
+                hintText:  TranslationKeys.oldPasswordTitle.tr,
               ),
               const SizedBox(height: 23),
               TextFormPasswordField.getTextFormField(
@@ -59,7 +61,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     isPasswordVisible = !isPasswordVisible;
                   });
                 },
-                hintText: "New Password",
+                hintText:  TranslationKeys.newPasswordTitle.tr,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return "Password cannot be empty";
@@ -78,7 +80,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                    isConfirmPasswordVisible = !isConfirmPasswordVisible;
                   });
                 },
-                hintText: "Confirm Password",
+                hintText:  TranslationKeys.confirmPassWordTitle.tr,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return "Password cannot be empty";
@@ -110,7 +112,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     }
                   }
                 },
-                title: "Save",
+                title: TranslationKeys.saveBtnTitle.tr,
                 fontWeight: FontWeight.w300,
               ),
             ],

@@ -35,7 +35,7 @@ class TextFormPasswordField {
           filled: true,
           prefixIcon: IconButton(
             onPressed: () {},
-            icon: SvgPicture.asset(AppAssets.logo),
+            icon: SvgPicture.asset(AppAssets.keyLogo),
           ),
           suffixIcon: IconButton(
             onPressed: onTap,

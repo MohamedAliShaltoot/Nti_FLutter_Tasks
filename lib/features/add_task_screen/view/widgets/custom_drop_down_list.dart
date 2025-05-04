@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nti_flutter_tasks/core/helper/svg_picture_custom.dart';
+
+import '../../../../core/helper/svg_picture_custom.dart';
 
 DropdownMenuItem customDropDownList({
   required String iconPath,

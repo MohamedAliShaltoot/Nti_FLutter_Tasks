@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:nti_flutter_tasks/features/add_task_screen/view/add_task_view.dart';
-import 'package:nti_flutter_tasks/features/add_task_screen/view/edit_task_view.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'features/on_boarding_screens/view/new_splash_view.dart';
+import 'core/cache/cache_data.dart';
+import 'core/cache/cache_helper.dart';
+import 'core/translation/translation_helper.dart';
 
-import 'package:nti_flutter_tasks/features/home_screen/view/home_no_task_view.dart';
-import 'package:nti_flutter_tasks/features/home_screen/view/home_tasks_view.dart';
-import 'package:nti_flutter_tasks/features/home_screen/view/to_days_task_view.dart';
+import 'features/home_screen/cubit/user_cubit.dart';
 
 import 'core/utils/app_colors.dart';
 import 'core/utils/app_strings.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await CacheHelper.init();
+  await TranslationHelper.setLanguage();
+
   runApp(const MyApp());
 }
 
@@ -19,15 +25,20 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: AppStrings.appTitle,
-      theme: ThemeData(
-        scaffoldBackgroundColor: AppColors.scaffoldBackground,
-        fontFamily: AppStrings.fontFamily,
-      ),
+    return BlocProvider(
+      create: (context) => UserCubit(),
+      child: GetMaterialApp(
+        locale: Locale(CacheData.lang!),
+        translations: TranslationHelper(),
+        debugShowCheckedModeBanner: false,
+        title: AppStrings.appTitle,
+        theme: ThemeData(
+          scaffoldBackgroundColor: AppColors.scaffoldBackground,
+          fontFamily: AppStrings.fontFamily,
+        ),
 
-      home: EditTaskView(),
+        home: NewSplashView(),
+      ),
     );
   }
 }

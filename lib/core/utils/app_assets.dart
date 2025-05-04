@@ -4,12 +4,12 @@ abstract class AppAssets {
 
   static const String myProfileImage = "${basePath}myImage.jpeg";
   static const String goOpenIcoon = "${basePath}icon_right.svg";
-  static const String logo = "${basePath}password.svg";
+  static const String keyLogo = "${basePath}password.svg";
   static const String lock = "${basePath}lock.svg";
   static const String profile = "${basePath}profile.svg";
   static const String unlock = "${basePath}unlock.svg";
   static const String noTaskImage = "${basePath}no_task_image.svg";
-  static const String rightIconSplash = "${basePath}right_icon_splash.png";
+  static const String rightIconSplash = "${basePath}splash_image.svg";
   static const String welcomeImage = "${basePath}let's_start_image.svg";
   static const String plusImage = "${basePath}plusIcon.svg";
   static const String settingsIcon = "${basePath}Setting.svg";

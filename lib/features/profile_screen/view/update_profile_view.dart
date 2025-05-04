@@ -1,6 +1,8 @@
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
+import '../../../core/translation/translation_keys.dart';
 import '../../../core/utils/app_assets.dart';
 import '../../../core/widgets/customElevatedButton.dart';
 import '../../../core/widgets/customTextFormUserName.dart';
@@ -46,7 +48,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   }
                   return null;
                 },
-                hintText: "Username",
+                hintText:  TranslationKeys.userNameTitle.tr,
               ),
           
              
@@ -58,7 +60,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                    //
                   }
                 },
-                title: "Update Profile",
+                title: TranslationKeys.updateProfileTitle.tr,
                 fontWeight: FontWeight.w300,
               ),
 

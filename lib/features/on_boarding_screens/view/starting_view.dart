@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/helper/svg_picture_custom.dart';
 import '../../../core/utils/app_assets.dart';
 import '../../../core/utils/app_colors.dart';
 import '../../../core/widgets/customElevatedButton.dart';
@@ -17,8 +18,12 @@ class StartingScreen extends StatelessWidget {
         child: Column(
           children: [
             SizedBox(height: height * 0.11),
+            setSvgPicture(assetPath: AppAssets.welcomeImage,
+              width: 290,
+              height: 300,
+            ),
             
-            Image.asset(AppAssets.welcomeImage,width: 290,height: 300,), 
+            //Image.asset(AppAssets.welcomeImage,width: 290,height: 300,), 
             SizedBox(height: 20),
             Text(
               'Welcome To Do It !',

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:nti_flutter_tasks/core/helper/svg_picture_custom.dart';
-import 'package:nti_flutter_tasks/core/utils/app_assets.dart';
-import 'package:nti_flutter_tasks/core/utils/app_colors.dart';
+import '../helper/svg_picture_custom.dart';
+import '../utils/app_assets.dart';
+import '../utils/app_colors.dart';
 
 Widget customCalenderContainer() {
   return Padding(

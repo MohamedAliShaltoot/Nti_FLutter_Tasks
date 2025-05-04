@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:nti_flutter_tasks/core/helper/svg_picture_custom.dart';
-import 'package:nti_flutter_tasks/core/widgets/custom_calender_container.dart';
-import 'package:nti_flutter_tasks/features/add_task_screen/view/widgets/custom_drop_down_list.dart';
 
+import '../../../core/helper/svg_picture_custom.dart';
 import '../../../core/utils/app_assets.dart';
 import '../../../core/utils/app_colors.dart';
 import '../../../core/widgets/customElevatedButton.dart';
+import '../../../core/widgets/custom_calender_container.dart';
+import 'add_task_view.dart';
+import 'widgets/custom_drop_down_list.dart';
 import 'widgets/text_task_content.dart';
 
 class EditTaskView extends StatefulWidget {
@@ -30,7 +31,12 @@ class _EditTaskViewState extends State<EditTaskView> {
         leading: IconButton(
           color: AppColors.black,
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (builder) => AddTaskView()),
+            );
+            // Navigator.push(context, MaterialPageRoute(builder: (context) => AddTaskView()));
+            // Navigator.pop(context);
           },
           icon: SvgPicture.asset(AppAssets.goBackIcon),
         ),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../home_screen/data/user_model.dart';
 import 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
@@ -24,14 +26,17 @@ class LoginCubit extends Cubit<LoginState> {
       // }
       error = "All fields are required , please fill all the fields";
       if (error == null) {
-        emit(LoginSucess());
+        UserModel userModel = UserModel(userName: emailController.text);
+        emit(LoginSuccessState(userModel));
       } else {
         emit(LoginFailure(error!));
       }
 
       // Everything is valid
     } else {
-      emit(LoginSucess());
+       UserModel userModel = UserModel(userName: emailController.text);
+      emit(LoginSuccessState(userModel));
+     
     }
   }
 
