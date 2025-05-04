@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
+import 'package:nti_flutter_tasks/core/helper/my_navigator.dart';
 import '../../../core/helper/my_responsive.dart';
 import '../../../core/translation/translation_keys.dart';
 import '../../../core/widgets/build_profile_header.dart';
@@ -14,7 +15,6 @@ import '../../../core/helper/svg_picture_custom.dart';
 import '../../../core/utils/app_assets.dart';
 import '../../../core/utils/app_colors.dart';
 import '../../../core/utils/app_strings.dart';
-
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -32,14 +32,17 @@ class HomeScreen extends StatelessWidget {
             shape: const CircleBorder(),
             backgroundColor: AppColors.primary,
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return HomeTaskContentScreen();
-                  },
-                ),
-              );
+              MyNavigator.goTo(
+                screen: () => HomeTaskContentScreen(),
+              ); //transition to the task screen
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //     builder: (context) {
+              //       return HomeTaskContentScreen();
+              //     },
+              //   ),
+              // );
             },
             child: setSvgPicture(
               assetPath: AppAssets.paperPlusIcon,
@@ -50,8 +53,8 @@ class HomeScreen extends StatelessWidget {
           body: SafeArea(
             child: Column(
               children: [
-             //  buildProfileHeader(context: context),
-               Row(
+                //  buildProfileHeader(context: context),
+                Row(
                   children: [
                     GestureDetector(
                       onTap: () {
@@ -65,7 +68,11 @@ class HomeScreen extends StatelessWidget {
                         );
                       },
                       child: Container(
-                        margin: EdgeInsetsDirectional.only(end: 16),
+                        margin: EdgeInsetsDirectional.only(
+                          end: 16,
+                          start: 16,
+                          top: 16,
+                        ),
                         height: MyResponsive.height(context, value: 60),
                         width: MyResponsive.height(context, value: 60),
                         decoration: BoxDecoration(
@@ -84,7 +91,7 @@ class HomeScreen extends StatelessWidget {
                           Text(
                             TranslationKeys.hello.tr,
                             style: TextStyle(
-                              fontSize: 12,
+                              fontSize: 18,
                               fontWeight: FontWeight.w300,
                               color: AppColors.black,
                             ),
@@ -108,7 +115,7 @@ class HomeScreen extends StatelessWidget {
                 SizedBox(height: height * 0.123),
 
                 Text(
-                 TranslationKeys.noTaskMsgTitle.tr,
+                  TranslationKeys.noTaskMsgTitle.tr,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: AppColors.black,
@@ -120,8 +127,11 @@ class HomeScreen extends StatelessWidget {
 
                 setSvgPicture(
                   assetPath: AppAssets.noTaskImage,
-                  width: width * 0.819,
-                  height: height * 0.322,
+                  width: MyResponsive.width(context, value: 304.96),
+                  height: MyResponsive.height(
+                    context,
+                    value: 224.76345825195312,
+                  ),
                 ),
               ],
             ),

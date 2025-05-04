@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:nti_flutter_tasks/features/home_screen/view/home_no_task_view.dart';
 import 'features/on_boarding_screens/view/new_splash_view.dart';
 import 'core/cache/cache_data.dart';
 import 'core/cache/cache_helper.dart';
@@ -36,8 +37,9 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: AppColors.scaffoldBackground,
           fontFamily: AppStrings.fontFamily,
         ),
-
-        home: NewSplashView(),
+//HomeScreen
+//NewSplashView
+        home: HomeScreen(),
       ),
     );
   }

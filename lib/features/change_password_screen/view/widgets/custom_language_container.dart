@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../utils/app_colors.dart';
+import '../../../../core/utils/app_colors.dart';
 
 class CustomLanguageContainer {
   static Widget getCustomLanguageContainer({
@@ -15,7 +15,7 @@ class CustomLanguageContainer {
         borderRadius: borderRadius,
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
+        padding: const EdgeInsetsDirectional.symmetric(horizontal: 18, vertical: 8),
         child: Text(
           text,
           style: TextStyle(

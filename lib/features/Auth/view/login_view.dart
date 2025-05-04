@@ -107,26 +107,26 @@ class _LoginScreenState extends State<LoginScreen> {
                       text1: TranslationKeys.userNoAccountTitle.tr,
                       text2: TranslationKeys.register.tr,
                     ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: CustomFilledBtn(
-                            onPressed: () {
-                              TranslationHelper.changeLanguage(true);
-                            },
-                            text: "ar",
-                          ),
-                        ),
-                        Expanded(
-                          child: CustomFilledBtn(
-                            onPressed: () {
-                              TranslationHelper.changeLanguage(false);
-                            },
-                            text: "en",
-                          ),
-                        ),
-                      ],
-                    )
+                    // Row(
+                    //   children: [
+                    //     Expanded(
+                    //       child: CustomFilledBtn(
+                    //         onPressed: () {
+                    //           TranslationHelper.changeLanguage(true);
+                    //         },
+                    //         text: "ar",
+                    //       ),
+                    //     ),
+                    //     Expanded(
+                    //       child: CustomFilledBtn(
+                    //         onPressed: () {
+                    //           TranslationHelper.changeLanguage(false);
+                    //         },
+                    //         text: "en",
+                    //       ),
+                    //     ),
+                    //   ],
+                    // )
                   ],
                 ),
               ),

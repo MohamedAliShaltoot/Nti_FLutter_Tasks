@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/get_utils.dart';
+import 'package:nti_flutter_tasks/core/helper/my_navigator.dart';
+import 'package:nti_flutter_tasks/core/helper/my_responsive.dart';
+import 'package:nti_flutter_tasks/features/home_screen/view/to_days_task_view.dart';
 
 import '../../../../core/translation/translation_keys.dart';
 import '../../../../core/utils/app_colors.dart';
@@ -8,6 +11,7 @@ import '../../../../core/utils/app_strings.dart';
 Widget customTaskContentContainer({
   required double width,
   required double height,
+  required BuildContext context,
 }) {
   return Container(
     width: width * 0.93,
@@ -24,16 +28,17 @@ Widget customTaskContentContainer({
           top: 18,
           left: 22,
           child: Text(
-           TranslationKeys.titleInHomeContainer.tr,
+            TranslationKeys.titleInHomeContainer.tr,
             style: TextStyle(
               color: AppColors.white,
               fontWeight: FontWeight.w500,
+              fontSize: 20,
             ),
           ),
         ),
 
         Positioned(
-          top: 70,
+          top: 120,
           left: 22,
           bottom: 18,
           child: Row(
@@ -63,24 +68,29 @@ Widget customTaskContentContainer({
         ),
 
         Positioned(
-          top: 81,
+          top: 120,
           left: 192,
           bottom: 18,
           right: 22,
-          child: Container(
-            width: 100,
-            height: 50,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: AppColors.white,
-              borderRadius: BorderRadius.circular(14),
-            ),
-            child: Text(
-              TranslationKeys.viewTaskTitle.tr,
-              style: TextStyle(
-                color: AppColors.primary,
-                fontWeight: FontWeight.w700,
-                fontSize: 18,
+          child: GestureDetector(
+            onTap: () {
+              MyNavigator.goTo(screen: () => ToDaysTaskView());
+            },
+            child: Container(
+              width: MyResponsive.width(context, value: 121),
+              height: MyResponsive.height(context, value: 36),
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: AppColors.white,
+                borderRadius: BorderRadius.circular(14),
+              ),
+              child: Text(
+                TranslationKeys.viewTaskTitle.tr,
+                style: TextStyle(
+                  color: AppColors.primary,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 18,
+                ),
               ),
             ),
           ),

@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:nti_flutter_tasks/core/cache/cache_helper.dart';
+import 'package:nti_flutter_tasks/core/cache/cache_keys.dart';
+import 'package:nti_flutter_tasks/core/helper/my_navigator.dart';
+import 'package:nti_flutter_tasks/core/translation/translation_keys.dart';
 
 import '../../../core/helper/svg_picture_custom.dart';
 import '../../../core/utils/app_assets.dart';
@@ -36,9 +41,14 @@ class StartingScreen extends StatelessWidget {
               textAlign: TextAlign.center
             ),
              SizedBox(height: 20),
-            Customelevatedbutton.getElevatedButton(onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterScreen()));
-            }, title: "Let's Start",fontWeight: FontWeight.w300),
+            Customelevatedbutton.getElevatedButton(onTap: () async {
+                await CacheHelper.saveData(key: CacheKeys.firstTime, value: false);
+                    MyNavigator.goTo(screen: ()=> RegisterScreen());
+
+             // Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterScreen()));
+
+
+            }, title:  TranslationKeys.letStart.tr,fontWeight: FontWeight.w300),
           ],
         ),
       ),

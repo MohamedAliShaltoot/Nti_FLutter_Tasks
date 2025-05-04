@@ -9,6 +9,7 @@ android {
     namespace = "com.example.nti_flutter_tasks"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
+     
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11

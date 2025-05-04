@@ -10,7 +10,7 @@ Widget? customFloatingButton({
 }) {
   return FloatingActionButton(
    // autofocus: true,
-    tooltip: "Add Task",
+    tooltip: toolTip,
     shape: const CircleBorder(),
     backgroundColor: AppColors.primary,
     onPressed: onPress,

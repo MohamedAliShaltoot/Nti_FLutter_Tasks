@@ -6,7 +6,7 @@ import '../../../core/translation/translation_helper.dart';
 import '../../../core/translation/translation_keys.dart';
 import '../../../core/utils/app_assets.dart';
 import '../../../core/utils/app_colors.dart';
-import '../../../core/widgets/custom_language_container.dart';
+import '../../change_password_screen/view/widgets/custom_language_container.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});

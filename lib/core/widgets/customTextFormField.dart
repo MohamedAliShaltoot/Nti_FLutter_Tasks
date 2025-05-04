@@ -23,7 +23,7 @@ class TextFormPasswordField {
         validator: validator,
         decoration: InputDecoration(
           focusColor: AppColors.primary,
-          hoverColor: AppColors.primary,
+         // hoverColor: AppColors.primary,
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(color: AppColors.primary,width: 2),
             borderRadius: BorderRadius.circular(radius)
