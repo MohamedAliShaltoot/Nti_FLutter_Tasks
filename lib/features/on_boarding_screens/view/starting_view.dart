@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nti_flutter_tasks/core/cache/cache_helper.dart';
-import 'package:nti_flutter_tasks/core/cache/cache_keys.dart';
-import 'package:nti_flutter_tasks/core/helper/my_navigator.dart';
-import 'package:nti_flutter_tasks/core/translation/translation_keys.dart';
+import '../../../core/cache/cache_helper.dart';
+import '../../../core/cache/cache_keys.dart';
+import '../../../core/helper/my_navigator.dart';
+import '../../../core/translation/translation_keys.dart';
 
 import '../../../core/helper/svg_picture_custom.dart';
 import '../../../core/utils/app_assets.dart';

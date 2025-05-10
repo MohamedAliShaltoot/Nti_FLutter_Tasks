@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/get_utils.dart';
-import 'package:nti_flutter_tasks/core/helper/my_navigator.dart';
-import 'package:nti_flutter_tasks/core/helper/my_responsive.dart';
-import 'package:nti_flutter_tasks/features/home_screen/view/to_days_task_view.dart';
 
+import '../../../../core/helper/my_navigator.dart';
+import '../../../../core/helper/my_responsive.dart';
 import '../../../../core/translation/translation_keys.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_strings.dart';
+import '../to_days_task_view.dart';
 
 Widget customTaskContentContainer({
   required double width,

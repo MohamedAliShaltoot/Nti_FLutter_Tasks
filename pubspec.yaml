@@ -31,11 +31,14 @@ dependencies:
   adaptive_screen_utils: ^2.4.0
   awesome_snackbar_content: ^0.1.5
   cupertino_icons: ^1.0.8
+  dio: ^5.8.0+1
+  either_dart: ^1.0.0
   flutter:
     sdk: flutter
   flutter_bloc: ^9.1.0
   flutter_svg: ^2.0.16
   get: ^4.7.2
+  image_picker: ^1.1.2
   shared_preferences: ^2.5.2
 
 dev_dependencies:

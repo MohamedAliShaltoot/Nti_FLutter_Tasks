@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:nti_flutter_tasks/features/home_screen/view/home_no_task_view.dart';
-import 'features/on_boarding_screens/view/new_splash_view.dart';
+
 import 'core/cache/cache_data.dart';
 import 'core/cache/cache_helper.dart';
 import 'core/translation/translation_helper.dart';
-
-import 'features/home_screen/cubit/user_cubit.dart';
-
 import 'core/utils/app_colors.dart';
 import 'core/utils/app_strings.dart';
+import 'features/home_screen/cubit/user_cubit.dart';
+import 'features/on_boarding_screens/view/splash_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,9 +35,9 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: AppColors.scaffoldBackground,
           fontFamily: AppStrings.fontFamily,
         ),
-//HomeScreen
-//NewSplashView
-        home: HomeScreen(),
+        //HomeScreen
+        //NewSplashView
+        home: SplashScreen(),
       ),
     );
   }

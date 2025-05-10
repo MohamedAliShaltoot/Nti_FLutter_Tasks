@@ -4,15 +4,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
 import '../../../core/helper/awssome_snack_bar.dart';
-import '../../../core/translation/translation_helper.dart';
+import '../../../core/helper/my_navigator.dart';
 import '../../../core/translation/translation_keys.dart';
 import '../../../core/utils/app_assets.dart';
 import '../../../core/widgets/customElevatedButton.dart';
 import '../../../core/widgets/customTextFormField.dart';
 import '../../../core/widgets/customTextFormUserName.dart';
-import '../../../core/widgets/custom_filled_btn.dart';
 import '../../../core/widgets/lastStringLine.dart';
-import '../../home_screen/cubit/user_cubit.dart';
 import '../../home_screen/view/home_no_task_view.dart';
 import '../manager/login_cubit/login_cubit.dart';
 import '../manager/login_cubit/login_state.dart';
@@ -57,16 +55,17 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     const SizedBox(height: 23),
                     TextUserNameFormField.getTextFormField(
-                      emailController: LoginCubit.get(context).emailController,
+                      emailController: LoginCubit.get(context).userNameController,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           errorMsg = true;
                           return "Email cannot be empty";
-                        } else if (!RegExp(
-                          r'^[^@]+@[^@]+\.[^@]+',
-                        ).hasMatch(value)) {
-                          return "Enter a valid email";
                         }
+                        //  else if (!RegExp(
+                        //   r'^[^@]+@[^@]+\.[^@]+',
+                        // ).hasMatch(value)) {
+                        //   return "Enter a valid email";
+                        // }
                         return null;
                       },
                       hintText: TranslationKeys.userNameTitle.tr,
@@ -134,18 +133,22 @@ class _LoginScreenState extends State<LoginScreen> {
           },
           listener: (context, state) {
             if (state is LoginSuccessState) {
-              UserCubit.get(context).getUserData(user: state.userModel);
-              showSnackBar(
-                context: context,
-                message:state.userModel.userName!,
-                contentType: ContentType.success,
-                title: "Congratulations!",
-              );
+              MyNavigator.goTo(screen: () => HomeScreen(), isReplace: true);
 
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => HomeScreen()),
-              );
+              // UserCubit.get(context).getUserData(user: state.userModel);
+              // showSnackBar(
+              //   context: context,
+              //   message:state.userModel.userName!,
+              //   contentType: ContentType.success,
+              //   title: "Congratulations!",
+              // );
+
+
+// old naviagation
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => HomeScreen()),
+              // );
             }
             if (state is LoginFailure) {
               showSnackBar(

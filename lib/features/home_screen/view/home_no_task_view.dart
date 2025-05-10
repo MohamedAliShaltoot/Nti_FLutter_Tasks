@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
-import 'package:nti_flutter_tasks/core/helper/my_navigator.dart';
+import '../../../core/helper/my_navigator.dart';
 import '../../../core/helper/my_responsive.dart';
 import '../../../core/translation/translation_keys.dart';
 import '../../../core/widgets/build_profile_header.dart';
