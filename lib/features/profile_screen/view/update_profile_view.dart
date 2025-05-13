@@ -54,7 +54,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
              
 
               const SizedBox(height: 23),
-              Customelevatedbutton.getElevatedButton(
+              CustomelEvatedbutton.getElevatedButton(
                 onTap: () {
                   if (formKey.currentState!.validate()) {
                    //

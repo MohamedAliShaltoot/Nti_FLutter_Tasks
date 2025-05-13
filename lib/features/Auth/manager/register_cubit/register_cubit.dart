@@ -5,8 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import '../../data/repo/auth_repo.dart';
 import 'register_state.dart';
 
-import '../../../home_screen/data/user_model.dart';
-
+import '../../../home_screen/data/models/user_model.dart';
 
 class RegisterCubit extends Cubit<RegisterState> {
   RegisterCubit() : super(RegisterInit());
@@ -20,35 +19,18 @@ class RegisterCubit extends Cubit<RegisterState> {
   int selectedGender = 0;
   bool isChecked = false;
   String? error;
-XFile? image;
+  XFile? image;
   AuthRepo authRepo = AuthRepo();
   static RegisterCubit get(context) => BlocProvider.of(context);
 
   void onRegisterPressed() {
-    // emit(RegisterLoading());
-    // error = null;
-    // if (formKey.currentState!.validate()) {
-    //   if (passwordController.text != confirmPasswordController.text) {
-
-    //     return;
-    //   }
-    //   error = "All fields are required , please fill all the fields";
-    //   if (error == null) {
-    //     UserModel userModel = UserModel(userName: emailController.text);
-    //     emit(RegisterSuccessState(userModel));
-    //   } else {
-    //     emit(RegisterFailure(error!));
-    //   }
-
-    //   // Everything is valid
-    // } else {
-    //   UserModel userModel = UserModel(userName: emailController.text);
-    //   emit(RegisterSuccessState(userModel));
-    // }
-     if(formKey.currentState!.validate())
-    {
+    if (formKey.currentState!.validate()) {
       emit(RegisterLoading());
-      var result =  authRepo.register(username: emailController.text, password: passwordController.text);
+      var result = authRepo.register(
+        username: emailController.text,
+        password: passwordController.text,
+        image: image,
+      );
       result.fold(
         (String error) // left
         {
@@ -57,13 +39,22 @@ XFile? image;
         (r) // right
         {
           emit(RegisterSuccessState());
-        });
+        },
+      );
     }
   }
 
   void togglePasswordVisibility() {
     isPasswordVisible = !isPasswordVisible;
     if (isPasswordVisible) {
+      emit(ShowPassword());
+    } else {
+      emit(HidePassword());
+    }
+  }
+   void toggleConfirmPasswordVisibility() {
+    isConfirmPasswordVisible = !isConfirmPasswordVisible;
+    if (isConfirmPasswordVisible) {
       emit(ShowPassword());
     } else {
       emit(HidePassword());

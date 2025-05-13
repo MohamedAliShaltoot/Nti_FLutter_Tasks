@@ -15,6 +15,8 @@ Map<String, String> en = {
   TranslationKeys.languageTitle: "Language",
   TranslationKeys.arabicTitle: "AR",
   TranslationKeys.englishTitle: "EN",
+  TranslationKeys.title: "Title",
+  TranslationKeys.description: "Description",
   TranslationKeys.changePasswordTitle: "Change Password",
   TranslationKeys.updateProfileTitle: "Update Profile",
   TranslationKeys.noTaskMsgTitle: " There are no tasks yet, \n Press the button \n To add New Task  ",

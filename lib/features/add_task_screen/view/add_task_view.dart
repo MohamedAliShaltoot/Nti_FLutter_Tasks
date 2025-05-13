@@ -1,147 +1,117 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:nti_flutter_tasks/core/helper/my_responsive.dart';
+import 'package:nti_flutter_tasks/core/helper/my_validator.dart';
+import 'package:nti_flutter_tasks/core/translation/translation_keys.dart';
+import 'package:nti_flutter_tasks/core/utils/app_assets.dart';
+import 'package:nti_flutter_tasks/core/utils/app_colors.dart';
+import 'package:nti_flutter_tasks/core/widgets/custom_app_bar.dart';
+import 'package:nti_flutter_tasks/core/widgets/custom_form_field.dart';
+import 'package:nti_flutter_tasks/features/add_task_screen/data/models/category_model.dart';
+import 'package:nti_flutter_tasks/features/add_task_screen/manager/add_task_cubit.dart';
+import 'package:nti_flutter_tasks/features/add_task_screen/manager/add_task_state.dart';
 
-import '../../../core/helper/svg_picture_custom.dart';
-import '../../../core/utils/app_assets.dart';
-import '../../../core/utils/app_colors.dart';
-import '../../../core/widgets/customElevatedButton.dart';
-import '../../../core/widgets/custom_calender_container.dart';
-import 'widgets/custom_drop_down_list.dart';
-import 'widgets/text_task_content.dart';
-
-class AddTaskView extends StatefulWidget {
+class AddTaskView extends StatelessWidget {
   const AddTaskView({super.key});
 
   @override
-  State<AddTaskView> createState() => _AddTaskViewState();
-}
-
-class _AddTaskViewState extends State<AddTaskView> {
-  TextEditingController titleController = TextEditingController();
-  TextEditingController descriptionController = TextEditingController();
-  int selectedTaskType = 0;
-
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // backgroundColor: AppColors.scaffoldBackground,
-      appBar: AppBar(
-        backgroundColor: AppColors.scaffoldBackground,
-        leading: IconButton(
-          color: AppColors.black,
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: SvgPicture.asset(AppAssets.goBackIcon),
+    return BlocProvider(
+      create: (context) => AddTaskCubit(),
+      child: Scaffold(
+       
+        appBar: CustomAppBar(
+          title: TranslationKeys.addTaskTitle.tr,
+          leading: IconButton(
+            color: AppColors.black,
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: SvgPicture.asset(AppAssets.goBackIcon),
+          ),
         ),
-        title: Text("Add Task", style: TextStyle(fontWeight: FontWeight.w300)),
-        centerTitle: true,
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(height: 26),
-            Container(
-              alignment: Alignment.center,
-              width: 261,
-              height: 207,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(7),
-                boxShadow: [
-                  BoxShadow(
-                    blurRadius: 4,
-                    spreadRadius: 0,
-                    offset: Offset(0, 2),
-                    color: Color.fromARGB(255, 160, 160, 162),
-                  ),
-                ],
-                image: DecorationImage(
-                  image: AssetImage(AppAssets.myProfileImage),
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-            SizedBox(height: 29),
-            textTaskContent(content: "Title"),
+        body: BlocConsumer<AddTaskCubit, AddTaskState>(
+          listener: (context, state) {},
+          builder: (context, state) {
+            return Padding(
+              padding: const EdgeInsets.all(17.0),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 40),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
 
-            SizedBox(height: 17),
-            textTaskContent(content: "Description"),
-            SizedBox(height: 15),
-            Padding(
-              padding: const EdgeInsets.only(left: 27, right: 17),
-              child: DropdownButtonFormField(
-                icon: setSvgPicture(
-                  assetPath: AppAssets.dropDownIcon,
-                  width: 24,
-                  height: 24,
-                ),
-                decoration: InputDecoration(
-                  fillColor: AppColors.white,
-                  filled: true,
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                    borderSide: BorderSide(color: AppColors.borderColor),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: AppColors.primary,
-                      width: 1.2,
-                    ),
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                    borderSide: BorderSide(
-                      width: 1,
-                      color: Color.fromARGB(255, 12, 13, 13),
+                      child: InkWell(
+                        onTap: () {
+                          AddTaskCubit.get(context).pickImage();
+                        },
+                        child: SizedBox(
+                          width: double.infinity,
+                          height: MyResponsive.height(context, value: 207),
+                          child:
+                              // state is AddTaskChangeImageState?
+                              AddTaskCubit.get(context).image != null
+                                  ? Image.file(
+                                    File(AddTaskCubit.get(context).image!.path),
+                                    fit: BoxFit.cover,
+                                  )
+                                  : Image.asset(
+                                    AppAssets.myProfileImage,
+                                    fit: BoxFit.cover,
+                                  ),
+                        ),
+                      ),
                     ),
                   ),
-                ),
-
-                dropdownColor: const Color(0xfff3f5f4),
-
-                iconEnabledColor: AppColors.primary,
-                value: selectedTaskType,
-                items: [
-                  customDropDownList(
-                    iconPath: AppAssets.homePinkIcon,
-                    icontainerIconBGC: AppColors.lightPink,
-                    textType: "Home",
-                    itemValue: 0,
+                  CustomFormField(
+                    label: TranslationKeys.title.tr,
+                    validator: RequiredValidator(),
+                    controller: AddTaskCubit.get(context).titleController,
                   ),
-                  customDropDownList(
-                    iconPath: AppAssets.personalGrayIcon,
-                    icontainerIconBGC: AppColors.primary,
-                    textType: "Personal",
-                    itemValue: 1,
+                  SizedBox(height: 20),
+                  CustomFormField(
+                    label: TranslationKeys.description.tr,
+                    validator: RequiredValidator(),
+                    controller: AddTaskCubit.get(context).descriptionController,
                   ),
-                  customDropDownList(
-                    iconPath: AppAssets.workShopIcon,
-                    icontainerIconBGC: AppColors.black,
-                    textType: "Work",
-                    itemValue: 2,
+                  SizedBox(height: 20),
+                  DropdownButtonFormField<CategoryModel>(
+                    validator: (value) {
+                      if (value == null) {
+                        return 'Please select';
+                      }
+                      return null;
+                    },
+                    items:
+                        AddTaskCubit.get(context).categories
+                            .map(
+                              (category) => DropdownMenuItem(
+                                value: category,
+                                child: Row(
+                                  children: [
+                                    category.icon,
+                                    SizedBox(width: 10),
+                                    Text(category.title),
+                                  ],
+                                ),
+                              ),
+                            )
+                            .toList(),
+                    onChanged: (value) {
+                      if (value != null) {
+                        AddTaskCubit.get(context).changeGroup(value);
+                      }
+                    },
                   ),
                 ],
-                onChanged: (value) {
-                  // Handle gender selection
-                  setState(() {});
-                  selectedTaskType = value!;
-                },
               ),
-            ),
-
-            SizedBox(height: 17),
-            customCalenderContainer(),
-            SizedBox(height: 17),
-
-            Customelevatedbutton.getElevatedButton(
-              onTap: () {},
-              title: "Add Task",
-              fontWeight: FontWeight.w300,
-              fontSize: 19,
-            ),
-          ],
+            );
+          },
         ),
       ),
     );

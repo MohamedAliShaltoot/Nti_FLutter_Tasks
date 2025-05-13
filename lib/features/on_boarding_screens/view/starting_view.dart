@@ -41,9 +41,29 @@ class StartingScreen extends StatelessWidget {
               textAlign: TextAlign.center
             ),
              SizedBox(height: 20),
-            Customelevatedbutton.getElevatedButton(onTap: () async {
-                await CacheHelper.saveData(key: CacheKeys.firstTime, value: false);
-                    MyNavigator.goTo(screen: ()=> RegisterScreen());
+            CustomelEvatedbutton.getElevatedButton(onTap: () async {
+
+ final success = await CacheHelper.saveData(
+                  key: CacheKeys.checkFirstTime,
+                  value: true,
+                );
+                print("✅ Saved? $success");
+                final value = CacheHelper.getData(
+                  key: CacheKeys.checkFirstTime,
+                );
+                print("📦 checkFirstTime now: $value");
+
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (_) => const RegisterScreen()),
+                );
+
+
+
+
+                // await CacheHelper.saveData(key: CacheKeys.checkFirstTime, value: true);
+                // print("✅ checkFirstTime saved!");
+                //     MyNavigator.goTo(screen: ()=> RegisterScreen());
 
              // Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterScreen()));
 

@@ -1,13 +1,13 @@
 
-import '../../../home_screen/data/user_model.dart';
+import '../../../home_screen/data/models/user_model.dart';
 
 abstract class LoginState{}
 
 class LoginInit extends LoginState{}
 class LoginLoading extends LoginState {}
 class LoginSuccessState extends LoginState {
-  // UserModel userModel;
-  // LoginSuccessState(this.userModel);
+  UserModel userModel;
+   LoginSuccessState(this.userModel);
 }
 
 class LoginFailure extends LoginState  {

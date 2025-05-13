@@ -57,7 +57,15 @@ class HomeTaskContentScreen extends StatelessWidget {
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             image: DecorationImage(
-                              image: AssetImage(AppAssets.myProfileImage),
+
+image: state is UserGetSuccess &&
+                          state.userModel.imagePath!=null?
+                          NetworkImage(state.userModel.imagePath!)
+                            :
+
+
+
+                               AssetImage(AppAssets.myProfileImage),
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -77,7 +85,7 @@ class HomeTaskContentScreen extends StatelessWidget {
                               SizedBox(height: 4),
                               if (state is UserGetSuccess)
                                 Text(
-                                  state.userModel.userName ?? 'No Name',
+                                  state.userModel.username ?? 'No Name',
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w300,

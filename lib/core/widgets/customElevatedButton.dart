@@ -1,8 +1,8 @@
-// ignore: file_names
+
 import 'package:flutter/material.dart';
 import 'package:nti_flutter_tasks/core/utils/app_colors.dart';
 
-class Customelevatedbutton {
+class CustomelEvatedbutton {
   static Widget getElevatedButton({
     required void Function() onTap,
     required String title,

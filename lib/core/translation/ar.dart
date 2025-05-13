@@ -4,6 +4,10 @@ import 'translation_keys.dart';
 
 Map<String, String> ar =
 {
+
+
+//TranslationKeys.login : is just a key or variable not a real value.
+
   TranslationKeys.login: 'تسجيل الدخول',
   TranslationKeys.register: 'انشاء حساب',
   TranslationKeys.hello: 'مرحباً',
@@ -18,6 +22,8 @@ Map<String, String> ar =
   TranslationKeys.languageTitle: "اللغة",
   TranslationKeys.arabicTitle: "AR",
   TranslationKeys.englishTitle: "EN",
+  TranslationKeys.title: "العنوان",
+  TranslationKeys.description: "الوصف",
   TranslationKeys.changePasswordTitle: "تغيير كلمة المرور",
   TranslationKeys.updateProfileTitle: "تحديث الملف الشخصي",
    TranslationKeys.noTaskMsgTitle:

@@ -16,6 +16,8 @@ abstract class TranslationKeys {
   static const register = "Register";
   static const login = "login";
   static const hello = "hello";
+  static const title = "title";
+  static const description = "description";
   static const String userNameTitle = "Username";
   static const String passWordTitle = "Password";
   static const String confirmPassWordTitle = " Confirm Password";

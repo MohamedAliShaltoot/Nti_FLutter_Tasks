@@ -92,7 +92,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
               ),
 
               const SizedBox(height: 23),
-              Customelevatedbutton.getElevatedButton(
+              CustomelEvatedbutton.getElevatedButton(
                 onTap: () {
                   if (formKey.currentState!.validate()) {
                     if (passwordController.text !=

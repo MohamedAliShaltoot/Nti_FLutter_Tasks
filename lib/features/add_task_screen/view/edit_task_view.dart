@@ -193,7 +193,7 @@ class _EditTaskViewState extends State<EditTaskView> {
             SizedBox(height: 17),
             customCalenderContainer(),
             SizedBox(height: 37),
-            Customelevatedbutton.getElevatedButton(
+            CustomelEvatedbutton.getElevatedButton(
               onTap: () {},
               title: "Mark as Done",
               fontWeight: FontWeight.w300,

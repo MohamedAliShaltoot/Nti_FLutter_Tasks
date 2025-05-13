@@ -2,6 +2,8 @@ import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:nti_flutter_tasks/core/utils/app_strings.dart';
+import 'package:nti_flutter_tasks/features/home_screen/cubit/user_cubit.dart';
 
 import '../../../core/helper/awssome_snack_bar.dart';
 import '../../../core/helper/my_navigator.dart';
@@ -16,22 +18,10 @@ import '../manager/login_cubit/login_cubit.dart';
 import '../manager/login_cubit/login_state.dart';
 import 'register_view.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController confirmPasswordController = TextEditingController();
-  bool isPasswordVisible = false;
-  bool isConfirmPasswordVisible = false;
-  bool errorMsg = false;
-
+  // errorMsg = false;
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -55,17 +45,15 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     const SizedBox(height: 23),
                     TextUserNameFormField.getTextFormField(
-                      emailController: LoginCubit.get(context).userNameController,
+                      emailController:
+                          LoginCubit.get(context).userNameController,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          errorMsg = true;
-                          return "Email cannot be empty";
+                          // errorMsg = true;
+                          return AppStrings
+                              .userNameEmptyData; // avoid static error msg
                         }
-                        //  else if (!RegExp(
-                        //   r'^[^@]+@[^@]+\.[^@]+',
-                        // ).hasMatch(value)) {
-                        //   return "Enter a valid email";
-                        // }
+
                         return null;
                       },
                       hintText: TranslationKeys.userNameTitle.tr,
@@ -90,9 +78,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
 
                     const SizedBox(height: 23),
-                    Customelevatedbutton.getElevatedButton(
+                    CustomelEvatedbutton.getElevatedButton(
                       onTap: LoginCubit.get(context).onLoginPressed,
-                      title: TranslationKeys.login.tr, //should be .tr to effiently work if no .tr it will display value of the key
+                      title: TranslationKeys.login.tr,
+                      //should be [.tr ] to efficiently work if no .tr it will display value of the key
                       fontWeight: FontWeight.w300,
                     ),
                     if (state is LoginFailure) Text(state.errorMsg),
@@ -101,31 +90,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     LastStringLine.getLastStringLine(
                       onTap: () {
                         Get.to(() => RegisterScreen());
-                      //  Navigator.pop(context);
+                        //  Navigator.pop(context);
                       },
                       text1: TranslationKeys.userNoAccountTitle.tr,
                       text2: TranslationKeys.register.tr,
                     ),
-                    // Row(
-                    //   children: [
-                    //     Expanded(
-                    //       child: CustomFilledBtn(
-                    //         onPressed: () {
-                    //           TranslationHelper.changeLanguage(true);
-                    //         },
-                    //         text: "ar",
-                    //       ),
-                    //     ),
-                    //     Expanded(
-                    //       child: CustomFilledBtn(
-                    //         onPressed: () {
-                    //           TranslationHelper.changeLanguage(false);
-                    //         },
-                    //         text: "en",
-                    //       ),
-                    //     ),
-                    //   ],
-                    // )
                   ],
                 ),
               ),
@@ -133,22 +102,10 @@ class _LoginScreenState extends State<LoginScreen> {
           },
           listener: (context, state) {
             if (state is LoginSuccessState) {
+              UserCubit.get(context).getUserData(user: state.userModel);
+              // now in UserGetSuccess state an object state will carry user data to use in any screen
+
               MyNavigator.goTo(screen: () => HomeScreen(), isReplace: true);
-
-              // UserCubit.get(context).getUserData(user: state.userModel);
-              // showSnackBar(
-              //   context: context,
-              //   message:state.userModel.userName!,
-              //   contentType: ContentType.success,
-              //   title: "Congratulations!",
-              // );
-
-
-// old naviagation
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => HomeScreen()),
-              // );
             }
             if (state is LoginFailure) {
               showSnackBar(
@@ -164,3 +121,11 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
+
+              // UserCubit.get(context).getUserData(user: state.userModel);
+              // showSnackBar(
+              //   context: context,
+              //   message:state.userModel.userName!,
+              //   contentType: ContentType.success,
+              //   title: "Congratulations!",
+              // );

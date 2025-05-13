@@ -161,26 +161,26 @@ MyNavigator.goTo(screen: () => LoginScreen(), isReplace: true);
                       },
                     ),
                     const SizedBox(height: 23),
-                    // TextFormPasswordField.getTextFormField(
-                    //   passwordController:
-                    //       RegisterCubit.get(context).confirmPasswordController,
-                    //   isPasswordVisible:
-                    //       RegisterCubit.get(context).isConfirmPasswordVisible,
-                    //   onTap: RegisterCubit.get(
-                    //         context,
-                    //       ).togglePasswordVisibility,
-                    //   hintText: TranslationKeys.confirmPassWordTitle.tr,
-                    //   validator: (value) {
-                    //     if (value == null ||
-                    //         value.isEmpty ||
-                    //         value != passwordController.text) {
-                    //       return "Confirm your password";
-                    //     }
-                    //     return null;
-                    //   },
-                    // ),
+                    TextFormPasswordField.getTextFormField(
+                      passwordController:
+                          RegisterCubit.get(context).confirmPasswordController,
+                      isPasswordVisible:
+                          RegisterCubit.get(context).isConfirmPasswordVisible,
+                      onTap: RegisterCubit.get(
+                            context,
+                          ).toggleConfirmPasswordVisibility,
+                      hintText: TranslationKeys.confirmPassWordTitle.tr,
+                      validator: (value) {
+                        if (value == null ||
+                            value.isEmpty ||
+                            value != passwordController.text) {
+                          return "Confirm your password";
+                        }
+                        return null;
+                      },
+                    ),
                     const SizedBox(height: 15),
-                   // ad choose remeber me here
+                   // add choose remember me here
                     const SizedBox(height: 15),
                    // add choose gender here
 
@@ -188,7 +188,7 @@ MyNavigator.goTo(screen: () => LoginScreen(), isReplace: true);
                      state is RegisterLoading
                         ? Center(child: CircularProgressIndicator())
                         :
-                    Customelevatedbutton.getElevatedButton(
+                    CustomelEvatedbutton.getElevatedButton(
                       onTap: RegisterCubit.get(context).onRegisterPressed,
                       title: TranslationKeys.register.tr,
                       fontWeight: FontWeight.w300,

@@ -1,12 +1,9 @@
-
-
-
 import 'package:dio/dio.dart';
+import 'package:nti_flutter_tasks/core/cache/cache_data.dart';
+import 'package:nti_flutter_tasks/core/network/end_points.dart';
 
-import 'end_points.dart';
 
-class ApiHelper
-{
+class ApiHelper {
   // singleton
   static final ApiHelper _instance = ApiHelper._init();
   factory ApiHelper() => _instance;
@@ -16,24 +13,42 @@ class ApiHelper
   Dio dio = Dio(
     BaseOptions(
       baseUrl: EndPoints.baseUrl,
-      connectTimeout: Duration(seconds: 5),
-      receiveTimeout: Duration(seconds: 5),
-    )
+      connectTimeout: Duration(seconds: 10),
+      receiveTimeout: Duration(seconds: 10),
+    ),
   );
 
-  Future<dynamic> postRequest({
+  Future<Response> postRequest({
     required String endPoint,
     Map<String, dynamic>? data,
-    bool isFormData = true
-}) async => await dio.post(
+    bool isFormData = true,
+    bool isProtected = false,
+  }) async {
+    return await dio.post(
       endPoint,
-      data: isFormData? FormData.fromMap(data??{}): data,
+      data: isFormData ? FormData.fromMap(data ?? {}) : data,
+      options: Options(
+        headers: {
+          if (isProtected) 'Authorization': 'Bearer ${CacheData.accessToken}',
+        },
+      ),
     );
+  }
 
-
-
-
-
-   
-
+  Future<Response> getRequest({
+    required String endPoint,
+    Map<String, dynamic>? data,
+    bool isFormData = true,
+    bool isProtected = false,
+  }) async {
+    return await dio.get(
+      endPoint,
+      data: isFormData ? FormData.fromMap(data ?? {}) : data,
+      options: Options(
+        headers: {
+          if (isProtected) 'Authorization': 'Bearer ${CacheData.accessToken}',
+        },
+      ),
+    );
+  }
 }

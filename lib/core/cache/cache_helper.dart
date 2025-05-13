@@ -1,45 +1,36 @@
+import 'package:nti_flutter_tasks/core/cache/cache_data.dart';
+import 'package:nti_flutter_tasks/core/cache/cache_keys.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class CacheHelper
-{
-  static late final SharedPreferences sharedPreferences ;
-  static Future<void> init() async
-  {
+class CacheHelper {
+  static late final SharedPreferences sharedPreferences;
+  static Future<void> init() async {
     sharedPreferences = await SharedPreferences.getInstance();
+   // removeData(key: CacheKeys.firstTime);
   }
 
-  static Future<bool> saveData ({
+  static Future<bool> saveData({
     required String key,
     required dynamic value,
-  }) async
-  {
-    if (value is String ) {
+  }) async {
+    if (value is String) {
       return await sharedPreferences.setString(key, value);
     }
-    if (value is int ) {
+    if (value is int) {
       return await sharedPreferences.setInt(key, value);
     }
-    if (value is bool ) {
+    if (value is bool) {
       return await sharedPreferences.setBool(key, value);
     }
 
     return await sharedPreferences.setDouble(key, value);
-
   }
 
-  static dynamic getData({required String key})
-  {
+  static dynamic getData({required String key}) {
     return sharedPreferences.get(key);
   }
 
-  static Future<bool> removeData
-      ({
-    required String key
-  })async
-  {
+  static Future<bool> removeData({required String key}) async {
     return await sharedPreferences.remove(key);
   }
-
-
-
 }

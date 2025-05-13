@@ -78,10 +78,17 @@ class HomeScreen extends StatelessWidget {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           image: DecorationImage(
-                            image: AssetImage(AppAssets.myProfileImage),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
+
+image: state is UserGetSuccess &&
+                          state.userModel.imagePath!=null?
+                          NetworkImage(state.userModel.imagePath!)
+                            :
+
+
+
+                               AssetImage(AppAssets.myProfileImage),
+                              fit: BoxFit.cover,
+                            ),)
                       ),
                     ),
                     Expanded(
@@ -99,7 +106,7 @@ class HomeScreen extends StatelessWidget {
                           SizedBox(height: 4),
                           if (state is UserGetSuccess)
                             Text(
-                              state.userModel.userName ?? 'No Name',
+                              state.userModel.username ?? 'No Name',
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w300,

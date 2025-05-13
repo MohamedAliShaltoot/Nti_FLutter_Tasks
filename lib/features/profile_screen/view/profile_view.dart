@@ -66,7 +66,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               SizedBox(height: 4),
                               if (state is UserGetSuccess)
                                 Text(
-                                  state.userModel.userName ?? 'No Name',
+                                  state.userModel.username ?? 'No Name',
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w300,

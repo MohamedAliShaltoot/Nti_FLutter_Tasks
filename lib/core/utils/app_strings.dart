@@ -20,5 +20,5 @@ abstract class AppStrings {
       "Add new feature for Do It \n app and commit it";
 
   static const String taskGroupName = "Task Groups";
-  // static const String appName = 'Do It';
+   static const String userNameEmptyData = "user name cannot be empty";
 }
