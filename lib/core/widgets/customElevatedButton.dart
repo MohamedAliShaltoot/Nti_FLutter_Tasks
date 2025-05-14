@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
-import 'package:nti_flutter_tasks/core/utils/app_colors.dart';
+
+import '../utils/app_colors.dart';
 
 class CustomelEvatedbutton {
   static Widget getElevatedButton({

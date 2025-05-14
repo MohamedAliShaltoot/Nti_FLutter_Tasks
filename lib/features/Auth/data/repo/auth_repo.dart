@@ -1,12 +1,13 @@
-
 import 'package:dio/dio.dart';
 import 'package:either_dart/either.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:nti_flutter_tasks/core/cache/cache_helper.dart';
-import 'package:nti_flutter_tasks/core/cache/cache_keys.dart';
-import 'package:nti_flutter_tasks/core/network/api_helper.dart';
-import 'package:nti_flutter_tasks/core/network/end_points.dart';
-import 'package:nti_flutter_tasks/features/home_screen/data/models/user_model.dart';
+
+import '../../../../core/cache/cache_helper.dart';
+import '../../../../core/cache/cache_keys.dart';
+import '../../../../core/network/api_helper.dart';
+import '../../../../core/network/api_keys.dart';
+import '../../../../core/network/end_points.dart';
+import '../../../home_screen/data/models/user_model.dart';
 
 class AuthRepo {
   // singleton
@@ -17,6 +18,7 @@ class AuthRepo {
   ApiHelper apiHelper = ApiHelper();
 
   // TODO: Wrap api keys into separate file
+
   Future<Either<String, void>> register({
     required String username,
     required String password,
@@ -26,9 +28,9 @@ class AuthRepo {
       await apiHelper.postRequest(
         endPoint: EndPoints.register,
         data: {
-          'username': username,
-          'password': password,
-          'image':
+          ApiKeys.userNameApiKey: username,
+          ApiKeys.passwordApiKey: password,
+          ApiKeys.imageApiKey:
               image == null
                   ? null
                   : await MultipartFile.fromFile(
@@ -56,8 +58,12 @@ class AuthRepo {
   }) async {
     try {
       Response response = await apiHelper.postRequest(
+        isProtected: true,
         endPoint: EndPoints.login,
-        data: {'username': username, 'password': password},
+        data: {
+          ApiKeys.userNameApiKey: username,
+          ApiKeys.passwordApiKey: password,
+        },
       );
       LoginResponseModel loginResponseModel = LoginResponseModel.fromJson(
         response.data,

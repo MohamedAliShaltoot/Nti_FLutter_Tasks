@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:nti_flutter_tasks/features/auth/view/login_view.dart';
+import 'package:nti_flutter_tasks/features/home_screen/cubit/user_cubit.dart';
 import 'package:nti_flutter_tasks/features/home_screen/view/home_no_task_view.dart';
 
 import '../../../core/cache/cache_data.dart';
@@ -39,8 +40,11 @@ void navigate(BuildContext context) async {
     print("🔥 checkFirstTime in Splash: $checkFirstTime");
 
     if (checkFirstTime != null && checkFirstTime == true) {
-      final accessToken = CacheHelper.getData(key: CacheKeys.accessToken);
-      if (accessToken != null) {
+       CacheData.accessToken = CacheHelper.getData(key: CacheKeys.accessToken);
+      if (CacheData.accessToken != null) {
+        UserCubit.get(context).getUserDataFromApi(
+          
+        );
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (_) => const HomeScreen()),

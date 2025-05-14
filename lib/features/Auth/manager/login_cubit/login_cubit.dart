@@ -1,8 +1,7 @@
-import 'package:either_dart/either.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../data/repo/auth_repo.dart';
 
+import '../../data/repo/auth_repo.dart';
 import 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
@@ -25,6 +24,10 @@ class LoginCubit extends Cubit<LoginState> {
       username: userNameController.text,
       password: passwordController.text,
     );
+
+    // fold is used to handle the result of the login attempt
+    // if the result is a failure (left), emit LoginFailure state
+    // if the result is a success (right), emit LoginSuccessState with the user model
     result.fold(
       (error) {
         emit(LoginFailure(error));

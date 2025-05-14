@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nti_flutter_tasks/core/helper/my_validator.dart';
+
+import '../helper/my_validator.dart';
 
 
 class CustomFormField extends StatelessWidget {

@@ -2,10 +2,9 @@ import 'package:either_dart/either.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+
 import '../../data/repo/auth_repo.dart';
 import 'register_state.dart';
-
-import '../../../home_screen/data/models/user_model.dart';
 
 class RegisterCubit extends Cubit<RegisterState> {
   RegisterCubit() : super(RegisterInit());

@@ -1,29 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
+
 import '../../../core/helper/my_navigator.dart';
 import '../../../core/helper/my_responsive.dart';
+import '../../../core/helper/svg_picture_custom.dart';
 import '../../../core/translation/translation_keys.dart';
-import '../../../core/widgets/build_profile_header.dart';
+import '../../../core/utils/app_assets.dart';
+import '../../../core/utils/app_colors.dart';
+import '../../auth/view/login_view.dart';
+import '../../profile_screen/view/profile_view.dart';
 import '../cubit/user_cubit.dart';
 import '../cubit/user_state.dart';
 import 'home_tasks_view.dart';
-import '../../profile_screen/view/profile_view.dart';
-
-import '../../../core/helper/svg_picture_custom.dart';
-import '../../../core/utils/app_assets.dart';
-import '../../../core/utils/app_colors.dart';
-import '../../../core/utils/app_strings.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
+   // double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    return BlocBuilder<UserCubit, UserState>(
+    return BlocConsumer<UserCubit, UserState>(
+      listener:(context, state){
+        if (state is UserError) {
+          MyNavigator.goTo(
+            screen: () => const LoginScreen(),
+            isReplace: true
+          );
+        }
+      } ,
       builder: (context, state) {
         return Scaffold(
           floatingActionButton: FloatingActionButton(

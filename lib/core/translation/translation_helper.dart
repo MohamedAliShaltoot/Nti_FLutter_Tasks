@@ -18,7 +18,7 @@ get keys => {
   };
 
    */
-    CacheKeys.keyAR  : ar, //ar.dart
+    CacheKeys.keyAR: ar, //ar.dart
     CacheKeys.keyEN: en, //en.dart
   };
 

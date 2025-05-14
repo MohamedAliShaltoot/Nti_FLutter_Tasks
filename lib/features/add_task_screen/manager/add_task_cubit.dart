@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:nti_flutter_tasks/core/utils/app_colors.dart';
-import 'package:nti_flutter_tasks/features/add_task_screen/data/models/category_model.dart';
-import 'package:nti_flutter_tasks/features/home_screen/data/models/task_model.dart';
-import 'package:nti_flutter_tasks/features/home_screen/repo/tasks_repo.dart';
 
+import '../../../core/utils/app_colors.dart';
+import '../data/models/category_model.dart';
+import '../data/models/get_task_response_model.dart';
+import '../data/repo/tasks_repo.dart';
 import 'add_task_state.dart';
 
 class AddTaskCubit extends Cubit<AddTaskState> {
-  AddTaskCubit() : super(AddTaskInitialState());
-
-  // variables and methods
+  AddTaskCubit() : super(AddTaskInitialState()){
+    getTasks();
+  }
   static AddTaskCubit get(context) => BlocProvider.of(context);
   TasksRepo tasksRepo = TasksRepo();
 
@@ -48,19 +48,64 @@ class AddTaskCubit extends Cubit<AddTaskState> {
     emit(AddTaskChangeGroupState());
   }
 
-  void onAddTaskPressed() {
-    emit(AddTaskLoadingState());
+ // TasksRepo tasksRepo = TasksRepo();
+  void onAddTaskPressed() async {
     if (!formKey.currentState!.validate()) return;
-    tasksRepo.addTask(
-      TaskModel(
+    emit(AddTaskLoadingState());
+    var result = await tasksRepo.addTask(
+      task: TaskModel(
         title: titleController.text,
         description: descriptionController.text,
-        categoryModel: group!,
-        endDate: endDate!,
+        image: image,
       ),
     );
-    emit(AddTaskSuccessState());
+    result.fold(
+      (error) {
+        emit(AddTaskErrorState(error: error));
+      },
+      (message) {
+        emit(AddTaskSuccessState(message: message));
+
+        // when add task success, get tasks
+        // to update the tasks list
+        // tasksRepo.getTasks().then(
+        //   (value) {
+        //     value.fold(
+        //       (error) {
+        //         emit(AddTaskErrorState(error: error));
+        //       },
+        //       (tasks) {
+        //         emit(GetTasksState(tasks: tasks));
+        //       },
+        //     );
+        //   },
+        // );
+      },
+    );
   }
+
+  // method to get tasks
+  void getTasks() async {
+    emit(AddTaskLoadingState());
+    var result = await tasksRepo.getTasks();
+    result.fold(
+      (error) {
+        emit(AddTaskErrorState(error: error));
+      },
+      (tasks) {
+        emit(GetTasksState(tasks: tasks));
+      },
+    );
+  }
+    Future<void> refreshTasks() async {
+    emit(AddTaskLoadingState());
+    final result = await tasksRepo.getTasks();
+    result.fold(
+      (error) => emit(AddTaskErrorState(error:error)),
+      (tasks) => emit(GetTasksState(tasks:tasks)),
+    );
+  }
+
 
   XFile? image;
   void pickImage() async {

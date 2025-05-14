@@ -5,21 +5,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+
 import '../../../core/helper/awssome_snack_bar.dart';
 import '../../../core/helper/my_navigator.dart';
-import '../../../core/widgets/image_manager/image_manager_view.dart';
-import '../manager/register_cubit/register_cubit.dart';
-import '../manager/register_cubit/register_state.dart';
-import '../../home_screen/cubit/user_cubit.dart';
-
 import '../../../core/translation/translation_keys.dart';
 import '../../../core/utils/app_assets.dart';
-import '../../../core/utils/app_colors.dart';
 import '../../../core/widgets/customElevatedButton.dart';
 import '../../../core/widgets/customTextFormField.dart';
 import '../../../core/widgets/customTextFormUserName.dart';
+import '../../../core/widgets/image_manager/image_manager_view.dart';
 import '../../../core/widgets/lastStringLine.dart';
-import '../../home_screen/view/home_no_task_view.dart';
+import '../manager/register_cubit/register_cubit.dart';
+import '../manager/register_cubit/register_state.dart';
 import 'login_view.dart';
 
 class RegisterScreen extends StatefulWidget {

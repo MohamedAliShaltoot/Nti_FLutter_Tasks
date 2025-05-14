@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:nti_flutter_tasks/core/cache/cache_data.dart';
-import 'package:nti_flutter_tasks/core/network/end_points.dart';
+
+import '../cache/cache_data.dart';
+import 'end_points.dart';
 
 
 class ApiHelper {

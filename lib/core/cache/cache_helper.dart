@@ -1,5 +1,5 @@
-import 'package:nti_flutter_tasks/core/cache/cache_data.dart';
-import 'package:nti_flutter_tasks/core/cache/cache_keys.dart';
+import 'cache_data.dart';
+import 'cache_keys.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CacheHelper {

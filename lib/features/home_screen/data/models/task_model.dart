@@ -1,4 +1,4 @@
-import 'package:nti_flutter_tasks/features/add_task_screen/data/models/category_model.dart';
+import '../../../add_task_screen/data/models/category_model.dart';
 
 
 class TaskModel {
