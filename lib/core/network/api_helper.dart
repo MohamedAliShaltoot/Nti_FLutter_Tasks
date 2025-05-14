@@ -52,4 +52,67 @@ class ApiHelper {
       ),
     );
   }
+
+
+  Future<Response> putRequest({
+    required String endPoint,
+    Map<String, dynamic>? data,
+    bool isFormData = true,
+    bool isProtected = false,
+  }) async {
+    return await dio.get(
+      endPoint,
+      data: isFormData ? FormData.fromMap(data ?? {}) : data,
+      options: Options(
+        headers: {
+          if (isProtected) 'Authorization': 'Bearer ${CacheData.accessToken}',
+        },
+      ),
+    );
+  }
+
+
+  Future<Response> deleteRequest({
+    required String endPoint,
+    Map<String, dynamic>? data,
+    bool isFormData = true,
+    bool isProtected = false,
+  }) async {
+    return await dio.get(
+      endPoint,
+      data: isFormData ? FormData.fromMap(data ?? {}) : data,
+      options: Options(
+        headers: {
+          if (isProtected) 'Authorization': 'Bearer ${CacheData.accessToken}',
+        },
+      ),
+    );
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
