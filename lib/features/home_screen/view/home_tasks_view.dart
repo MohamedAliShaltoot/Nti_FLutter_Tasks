@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use, avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
@@ -7,8 +9,10 @@ import 'package:nti_flutter_tasks/core/helper/my_navigator.dart';
 import 'package:nti_flutter_tasks/features/add_task_screen/data/repo/tasks_repo.dart';
 import 'package:nti_flutter_tasks/features/add_task_screen/manager/add_task_cubit/add_task_cubit.dart';
 import 'package:nti_flutter_tasks/features/add_task_screen/manager/add_task_cubit/add_task_state.dart';
+import 'package:nti_flutter_tasks/features/add_task_screen/manager/delete_task_cubit/delete_task_cubit.dart';
 import 'package:nti_flutter_tasks/features/add_task_screen/manager/edit_task_cubit/edit_task_cubit.dart';
 import 'package:nti_flutter_tasks/features/add_task_screen/view/edit_task_view.dart';
+import 'package:nti_flutter_tasks/features/profile_screen/view/profile_view.dart';
 
 import '../../../core/helper/my_responsive.dart';
 import '../../../core/translation/translation_keys.dart';
@@ -53,6 +57,11 @@ class HomeTaskContentScreen extends StatelessWidget {
                 );
                 if (context.mounted) {
                   context.read<AddTaskCubit>().refreshTasks();
+                  //  UserCubit.sharedImageOnAllScreens =
+                  //     state is UserGetSuccess &&
+                  //             state.userModel.imagePath != null
+                  //         ? NetworkImage(state.userModel.imagePath!)
+                  //         : AssetImage(AppAssets.myProfileImage);
                 }
               },
               pathIcon: AppAssets.paperPlusIcon,
@@ -69,23 +78,37 @@ class HomeTaskContentScreen extends StatelessWidget {
                     // buildProfileHeader(context: context),
                     Row(
                       children: [
-                        Container(
-                          margin: EdgeInsetsDirectional.only(
-                            end: 16,
-                            start: 6,
-                            top: 16,
-                          ),
-                          height: MyResponsive.height(context, value: 60),
-                          width: MyResponsive.height(context, value: 60),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            image: DecorationImage(
-                              image:
-                                  state is UserGetSuccess &&
-                                          state.userModel.imagePath != null
-                                      ? NetworkImage(state.userModel.imagePath!)
-                                      : AssetImage(AppAssets.myProfileImage),
-                              fit: BoxFit.cover,
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return ProfileScreen();
+                                },
+                              ),
+                            );
+                          },
+                          child: Container(
+                            margin: EdgeInsetsDirectional.only(
+                              end: 16,
+                              start: 6,
+                              top: 16,
+                            ),
+                            height: MyResponsive.height(context, value: 60),
+                            width: MyResponsive.height(context, value: 60),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                image:
+                                    state is UserGetSuccess &&
+                                            state.userModel.imagePath != null
+                                        ? NetworkImage(
+                                          state.userModel.imagePath!,
+                                        )
+                                        : AssetImage(AppAssets.myProfileImage),
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                         ),
@@ -214,51 +237,130 @@ class HomeTaskContentScreen extends StatelessWidget {
                                         context.read<AddTaskCubit>().getTasks();
                                       }
                                     },
-                                    child: Container(
-                                      height: 100,
-                                      margin: const EdgeInsets.symmetric(
-                                        vertical: 8,
-                                        horizontal: 10,
-                                      ),
-                                      decoration: BoxDecoration(
-                                        color:
-                                            AppColors.containerBackgroundColor,
-                                        borderRadius: BorderRadius.circular(15),
-                                      ),
-                                      child: ListTile(
-                                        title: Text(
-                                          task.title ?? '',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w300,
-                                          ),
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
+                                    child: Dismissible(
+                                      key: Key(task.id.toString()),
+                                      background: Container(
+                                        color: AppColors.primary,
+                                        alignment: Alignment.centerLeft,
+                                        child: const Icon(
+                                          Icons.delete,
+                                          color: Colors.white,
                                         ),
-                                        subtitle: Text(task.description ?? ''),
-                                        trailing: Column(
-                                          children: [
-                                            Text(
-                                              fullDate, // "Wed, 14 May 2025"
-                                              // style: TextStyle(fontSize: 20),
-                                            ),
-                                            SizedBox(height: 8),
-                                            Text(
-                                              time, // "03:34:24"
-                                              style: TextStyle(
-                                                // fontSize: 18,
-                                                color: Colors.grey[600],
+                                      ),
+                                      secondaryBackground: Container(
+                                        color: AppColors.primary,
+                                        alignment: Alignment.centerRight,
+                                        child: const Icon(
+                                          Icons.edit,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      onDismissed: (direction) {
+                                        if (direction ==
+                                            DismissDirection.startToEnd || direction ==
+                                                DismissDirection.endToStart) {
+                                          // Handle left swipe
+                                          DeleteTaskCubit.get(
+                                            context,
+                                          ).onDeleteBtnPressed(task.id);
+                                          ScaffoldMessenger.of(
+                                            context,
+                                          ).showSnackBar(
+                                            SnackBar(
+                                              content: Text(
+                                                "Task deleted successfully",
                                               ),
+                                            ),
+                                          );
+                                          print('Left swipe');
+                                        }
+                                        //  else if (direction ==
+                                        //     DismissDirection.endToStart) {
+                                        //   // Handle right swipe
+                                        //   print('Right swipe');
+
+                                        //   MyNavigator.goTo(
+                                        //     screen:
+                                        //         () => EditTaskView(
+                                        //           taskID: task.id!,
+                                        //         ),
+                                        //   );
+                                        // }
+
+
+
+                                        //  DeleteTaskCubit.get(context).onDeleteBtnPressed(
+                                        //   task.id,);
+                                        //   ScaffoldMessenger.of(context)
+                                        //       .showSnackBar(
+                                        //     SnackBar(
+                                        //       content: Text(
+                                        //        "Task deleted successfully",
+                                        //       ),
+                                        //     ),
+                                        //   );
+                                      },
+                                      child: Container(
+                                        height: 100,
+                                        margin: const EdgeInsets.symmetric(
+                                          vertical: 8,
+                                          horizontal: 10,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color:
+                                              AppColors
+                                                  .containerBackgroundColor,
+                                          borderRadius: BorderRadius.circular(
+                                            15,
+                                          ),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: AppColors.gray,
+                                              blurRadius: 5,
+                                              offset: const Offset(0, 3),
                                             ),
                                           ],
                                         ),
-                                        leading:
-                                            task.imagePath != null
-                                                ? Image.network(
-                                                  task.imagePath!,
-                                                  width: 50,
-                                                  height: 50,
-                                                )
-                                                : null,
+                                        child: ListTile(
+                                          title: Text(
+                                            task.title ?? '',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.w300,
+                                            ),
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                          subtitle: Padding(
+                                            padding: const EdgeInsets.only(
+                                              top: 18,
+                                            ),
+                                            child: Text(task.description ?? ''),
+                                          ),
+                                          trailing: Column(
+                                            children: [
+                                              Text(
+                                                fullDate, // "Wed, 14 May 2025"
+                                                // style: TextStyle(fontSize: 20),
+                                              ),
+                                              SizedBox(height: 8),
+                                              Text(
+                                                time, // "03:34:24"
+                                                style: TextStyle(
+                                                  // fontSize: 18,
+                                                  color: Colors.grey[600],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          leading:
+                                              task.imagePath != null
+                                                  ? Image.network(
+                                                    task.imagePath!,
+                                                    width: 50,
+                                                    height: 50,
+                                                  )
+                                                  : null,
+                                        ),
                                       ),
                                     ),
                                   );
