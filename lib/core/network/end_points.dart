@@ -7,7 +7,7 @@ abstract class EndPoints
    static const String getUserData = 'get_user_data';
    static const String addTask = 'new_task';
     static const String getTasks = 'my_tasks';
-    static const String updateProfile = 'update_profile';
+    static const String updateUserProfile = 'update_profile';
     static const String getUser = 'delete_user';
     static const String changePassword = 'change_password';
     static const String refreshToken = 'refresh_token';
