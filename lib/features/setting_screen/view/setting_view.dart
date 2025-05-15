@@ -85,16 +85,45 @@ class _SettingScreenState extends State<SettingScreen> {
                                 LanguageCubit.get(context).changeLanguage(true);
                                 // TranslationHelper.changeLanguage(true);
                               },
-                              child:
+                              child: Stack(
+                                children: [
                                   CustomLanguageContainer.getCustomLanguageContainer(
-                                    backgroundColor: Color(0xffD9D9D9),
+                                    backgroundColor:
+                                        LanguageCubit.get(context).isArabic
+                                            ? AppColors.primary
+                                            : const Color(0xffD9D9D9),
                                     text: TranslationKeys.arabicTitle.tr,
-                                    textColor: AppColors.black,
-                                    borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(5),
-                                      bottomLeft: Radius.circular(5),
-                                    ),
+                                    textColor:
+                                        LanguageCubit.get(context).isArabic
+                                            ? Colors.white
+                                            : AppColors.black,
+                                    borderRadius:
+                                        LanguageCubit.get(context).isArabic
+                                            ? BorderRadius.only(
+                                              topRight: Radius.circular(5),
+                                              bottomRight: Radius.circular(5),
+                                            )
+                                            : BorderRadius.only(
+                                              topLeft: Radius.circular(5),
+                                              bottomLeft: Radius.circular(5),
+                                            ),
                                   ),
+                                  if (LanguageCubit.get(context).isArabic)
+                                    Positioned(
+                                      top: 0,
+                                      right: 0,
+                                      child: Container(
+                                        width: 8,
+                                        height: 8,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          shape: BoxShape.circle,
+                                        ),
+                                        margin: EdgeInsets.all(4),
+                                      ),
+                                    ),
+                                ],
+                              ),
                             ),
                             GestureDetector(
                               onTap: () {
@@ -103,15 +132,45 @@ class _SettingScreenState extends State<SettingScreen> {
                                   context,
                                 ).changeLanguage(false);
                               },
-                              child:
+                              child: Stack(
+                                children: [
                                   CustomLanguageContainer.getCustomLanguageContainer(
-                                    backgroundColor: AppColors.primary,
+                                    backgroundColor:
+                                        !LanguageCubit.get(context).isArabic
+                                            ? AppColors.primary
+                                            : const Color(0xffD9D9D9),
                                     text: TranslationKeys.englishTitle.tr,
-                                    borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(5),
-                                      bottomRight: Radius.circular(5),
-                                    ),
+                                    textColor:
+                                        !LanguageCubit.get(context).isArabic
+                                            ? Colors.white
+                                            : AppColors.black,
+                                    borderRadius:
+                                        LanguageCubit.get(context).isArabic
+                                            ? BorderRadius.only(
+                                              topLeft: Radius.circular(5),
+                                              bottomLeft: Radius.circular(5),
+                                            )
+                                            : BorderRadius.only(
+                                              topRight: Radius.circular(5),
+                                              bottomRight: Radius.circular(5),
+                                            ),
                                   ),
+                                  if (!LanguageCubit.get(context).isArabic)
+                                    Positioned(
+                                      top: 0,
+                                      right: 0,
+                                      child: Container(
+                                        width: 8,
+                                        height: 8,
+                                        decoration: BoxDecoration(
+                                          color: AppColors.red,
+                                          shape: BoxShape.circle,
+                                        ),
+                                        margin: EdgeInsets.all(4),
+                                      ),
+                                    ),
+                                ],
+                              ),
                             ),
                           ],
                         ),
