@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:nti_flutter_tasks/core/widgets/custom_svg_picture.dart';
 
 import '../../../core/helper/my_navigator.dart';
 import '../../../core/helper/my_responsive.dart';
@@ -137,15 +138,22 @@ image: state is UserGetSuccess &&
                   ),
                 ),
                 SizedBox(height: 39),
-
-                setSvgPicture(
-                  assetPath: AppAssets.noTaskImage,
+                CustomSvg(path: AppAssets.noTaskImage,
                   width: MyResponsive.width(context, value: 304.96),
                   height: MyResponsive.height(
                     context,
                     value: 224.76345825195312,
                   ),
                 ),
+
+                // setSvgPicture(
+                //   assetPath: AppAssets.noTaskImage,
+                //   width: MyResponsive.width(context, value: 304.96),
+                //   height: MyResponsive.height(
+                //     context,
+                //     value: 224.76345825195312,
+                //   ),
+                // ),
               ],
             ),
           ),
