@@ -32,36 +32,76 @@ class _NewSplashViewState extends State<NewSplashView> {
     navigate(context);
     
   }
-
-void navigate(BuildContext context) async {
-    await Future.delayed(const Duration(seconds: 2));
-    final checkFirstTime = CacheHelper.getData(key: CacheKeys.checkFirstTime);
-    // ignore: avoid_print
-    print("🔥 checkFirstTime in Splash: $checkFirstTime");
-
-    if (checkFirstTime != null && checkFirstTime == true) {
-       CacheData.accessToken = CacheHelper.getData(key: CacheKeys.accessToken);
-      if (CacheData.accessToken != null) {
-        UserCubit.get(context).getUserDataFromApi(
-          
-        );
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (_) => const HomeScreen()),
-        );
-      } else {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (_) => const LoginScreen()),
-        );
-      }
-    } else {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (_) => const StartingScreen()),
-      );
-    }
+  
+  void navigate(context)async
+  {
+ Future.delayed((Duration(milliseconds: 500)),
+        ()
+     {
+       // navigate to lets start view
+       CacheData.checkFirstTime = CacheHelper.getData(key: CacheKeys.checkFirstTime);
+       if(CacheData.checkFirstTime != null)
+       {
+         // check is logged in
+         CacheData.accessToken = CacheHelper.getData(key: CacheKeys.refreshToken) ;
+         if(CacheData.accessToken != null)
+         {
+           UserCubit.get(context).getUserDataFromAPI()
+               .then((bool result)
+           {
+             if(result) {
+               MyNavigator.goTo(screen: ()=> HomeScreen(), isReplace: true);
+             }
+             else
+             {
+               MyNavigator.goTo(screen: ()=> LoginScreen(), isReplace: true);
+             }
+           });
+         }
+         else
+         {
+           // goto login
+           MyNavigator.goTo(screen: ()=> LoginScreen(), isReplace: true);
+         }
+       }
+       else// first time
+           {
+         MyNavigator.goTo(screen: ()=> StartingScreen(), isReplace: true);
+       }
+     });
   }
+
+  
+
+// void navigate(BuildContext context) async {
+//     await Future.delayed(const Duration(seconds: 2));
+//     final checkFirstTime = CacheHelper.getData(key: CacheKeys.checkFirstTime);
+//     // ignore: avoid_print
+//     print("🔥 checkFirstTime in Splash: $checkFirstTime");
+
+//     if (checkFirstTime != null && checkFirstTime == true) {
+//        CacheData.accessToken = CacheHelper.getData(key: CacheKeys.accessToken);
+//       if (CacheData.accessToken != null) {
+//         UserCubit.get(context).getUserDataFromApi(
+          
+//         );
+//         Navigator.pushReplacement(
+//           context,
+//           MaterialPageRoute(builder: (_) => const HomeScreen()),
+//         );
+//       } else {
+//         Navigator.pushReplacement(
+//           context,
+//           MaterialPageRoute(builder: (_) => const LoginScreen()),
+//         );
+//       }
+//     } else {
+//       Navigator.pushReplacement(
+//         context,
+//         MaterialPageRoute(builder: (_) => const StartingScreen()),
+//       );
+//     }
+//   }
 //   void navigate(context) async {
 // await Future.delayed(Duration(seconds: 2), ()         {
 //      // CacheHelper.removeData(key:  CacheKeys.checkFirstTime);

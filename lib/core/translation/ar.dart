@@ -29,6 +29,9 @@ Map<String, String> ar =
    TranslationKeys.noTaskMsgTitle:
       "لا توجد مهام حتى الآن، \n اضغط على الزر \n لإضافة مهمة جديدة",
   TranslationKeys.addTaskTitle: 'إضافة مهام',
+  TranslationKeys.editTaskTitle: 'تعديل المهام',
+  TranslationKeys.deleteTaskTitle: 'حذف المهام',
+  TranslationKeys.deleteTaskMsgTitle: 'هل أنت متأكد أنك تريد حذف هذه المهمة؟',
   TranslationKeys.filterTaskTitle: 'تصفية المهام',
   TranslationKeys.taskAppBarTitle: 'المهام الحالية',
   TranslationKeys.searchTitle: "بحث...",

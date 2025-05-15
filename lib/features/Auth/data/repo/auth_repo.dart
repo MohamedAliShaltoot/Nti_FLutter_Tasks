@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:either_dart/either.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:nti_flutter_tasks/core/network/api_response.dart';
 
 import '../../../../core/cache/cache_helper.dart';
 import '../../../../core/cache/cache_keys.dart';
@@ -57,13 +58,15 @@ class AuthRepo {
     required String password,
   }) async {
     try {
-      Response response = await apiHelper.postRequest(
+      ApiResponse response = await apiHelper.postRequest(
+       // sendRefreshToken: true,
         isProtected: true,
         endPoint: EndPoints.login,
         data: {
           ApiKeys.userNameApiKey: username,
           ApiKeys.passwordApiKey: password,
         },
+        
       );
       LoginResponseModel loginResponseModel = LoginResponseModel.fromJson(
         response.data,

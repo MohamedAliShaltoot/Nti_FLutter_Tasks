@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:either_dart/either.dart';
+import 'package:nti_flutter_tasks/core/network/api_response.dart';
 
 import '../../../../core/network/api_helper.dart';
 import '../../../../core/network/end_points.dart';
@@ -16,7 +17,7 @@ class HomeRepo {
 
   Future<Either<String, UserModel>> getUserData() async{
     try {
-var response = await apiHelper.getRequest(
+ApiResponse response = await apiHelper.getRequest(
         endPoint: EndPoints.getUserData,
         isProtected: true,
       );

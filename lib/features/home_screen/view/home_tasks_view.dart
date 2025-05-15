@@ -3,9 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:intl/intl.dart';
+import 'package:nti_flutter_tasks/core/helper/my_navigator.dart';
 import 'package:nti_flutter_tasks/features/add_task_screen/data/repo/tasks_repo.dart';
-import 'package:nti_flutter_tasks/features/add_task_screen/manager/add_task_cubit.dart';
-import 'package:nti_flutter_tasks/features/add_task_screen/manager/add_task_state.dart';
+import 'package:nti_flutter_tasks/features/add_task_screen/manager/add_task_cubit/add_task_cubit.dart';
+import 'package:nti_flutter_tasks/features/add_task_screen/manager/add_task_cubit/add_task_state.dart';
+import 'package:nti_flutter_tasks/features/add_task_screen/manager/edit_task_cubit/edit_task_cubit.dart';
+import 'package:nti_flutter_tasks/features/add_task_screen/view/edit_task_view.dart';
 
 import '../../../core/helper/my_responsive.dart';
 import '../../../core/translation/translation_keys.dart';
@@ -24,8 +27,8 @@ class HomeTaskContentScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
+    // double width = MediaQuery.of(context).size.width;
+    // double height = MediaQuery.of(context).size.height;
     // TasksRepo tasksRepo = TasksRepo();
     return BlocBuilder<UserCubit, UserState>(
       // listener: (context, state) {
@@ -115,56 +118,15 @@ class HomeTaskContentScreen extends StatelessWidget {
                     ),
 
                     SizedBox(height: 15),
-                    customTaskContentContainer(
-                      width: width,
-                      height: height,
-                      context: context,
-                    ),
 
+                    // customTaskContentContainer(
+                    //   width: width,
+                    //   height: height,
+                    //   context: context,
+                    // ),
                     SizedBox(height: 15),
-                    Align(
-                      alignment: AlignmentDirectional.centerStart,
-                      child: Padding(
-                        padding: const EdgeInsetsDirectional.only(
-                          start: 10,
-                          end: 235,
-                        ),
-                        child: Row(
-                          children: [
-                            Text(
-                              TranslationKeys.inProgressTitle.tr,
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w300,
-                                color: AppColors.black,
-                              ),
-                            ),
-                            SizedBox(width: 10),
-                            Container(
-                              // alignment: Alignment.center,
-                              width: 20,
-                              height: 20,
-                              decoration: BoxDecoration(
-                                color: AppColors.containerBackgroundColor,
-                                borderRadius: BorderRadius.circular(10),
-                                // shape: BoxShape.circle,
-                              ),
 
-                              child: Text(
-                                textAlign: TextAlign.center,
-                                "5",
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w300,
-                                  color: AppColors.primary,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-
+                    //progress
                     SizedBox(height: 15),
 
                     //flexible
@@ -228,50 +190,76 @@ class HomeTaskContentScreen extends StatelessWidget {
                                     'HH:mm:ss',
                                   ).format(dateTime);
 
-                                  return Container(
-                                    height: 100,
-                                    margin: const EdgeInsets.symmetric(
-                                      vertical: 8,
-                                      horizontal: 10,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      color: AppColors.containerBackgroundColor,
-                                      borderRadius: BorderRadius.circular(15),
-                                    ),
-                                    child: ListTile(
-                                      title: Text(
-                                        task.title ?? '',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w300,
+                                  return GestureDetector(
+                                    onTap: () {
+                                      //print id
+                                      // ignore: avoid_print
+                                      print('Task ID/${task.id}');
+                                      EditTaskCubit.id = task.id!;
+                                      EditTaskCubit.InitialTitleController =
+                                          TextEditingController(
+                                            text: task.title,
+                                          );
+                                      EditTaskCubit
+                                              .InitialDescriptionController =
+                                          TextEditingController(
+                                            text: task.description,
+                                          );
+                                      MyNavigator.goTo(
+                                        screen:
+                                            () =>
+                                                EditTaskView(taskID: task.id!),
+                                      );
+                                      if (context.mounted) {
+                                        context.read<AddTaskCubit>().getTasks();
+                                      }
+                                    },
+                                    child: Container(
+                                      height: 100,
+                                      margin: const EdgeInsets.symmetric(
+                                        vertical: 8,
+                                        horizontal: 10,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color:
+                                            AppColors.containerBackgroundColor,
+                                        borderRadius: BorderRadius.circular(15),
+                                      ),
+                                      child: ListTile(
+                                        title: Text(
+                                          task.title ?? '',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w300,
+                                          ),
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
                                         ),
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                      subtitle: Text(task.description ?? ''),
-                                      trailing: Column(
-                                        children: [
-                                          Text(
-                                            fullDate, // "Wed, 14 May 2025"
-                                            // style: TextStyle(fontSize: 20),
-                                          ),
-                                          SizedBox(height: 8),
-                                          Text(
-                                            time, // "03:34:24"
-                                            style: TextStyle(
-                                              // fontSize: 18,
-                                              color: Colors.grey[600],
+                                        subtitle: Text(task.description ?? ''),
+                                        trailing: Column(
+                                          children: [
+                                            Text(
+                                              fullDate, // "Wed, 14 May 2025"
+                                              // style: TextStyle(fontSize: 20),
                                             ),
-                                          ),
-                                        ],
+                                            SizedBox(height: 8),
+                                            Text(
+                                              time, // "03:34:24"
+                                              style: TextStyle(
+                                                // fontSize: 18,
+                                                color: Colors.grey[600],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        leading:
+                                            task.imagePath != null
+                                                ? Image.network(
+                                                  task.imagePath!,
+                                                  width: 50,
+                                                  height: 50,
+                                                )
+                                                : null,
                                       ),
-                                      leading:
-                                          task.imagePath != null
-                                              ? Image.network(
-                                                task.imagePath!,
-                                                width: 50,
-                                                height: 50,
-                                              )
-                                              : null,
                                     ),
                                   );
                                 },
@@ -367,6 +355,51 @@ class HomeTaskContentScreen extends StatelessWidget {
                     //           subTitleBGC: AppColors.black,
                     //           iconPath: AppAssets.homeIcon,
                     //           fontWeight: FontWeight.w500,
+                    //         ),
+                    //       ],
+                    //     ),
+                    //   ),
+                    // ),
+
+
+
+                                        // Align(
+                    //   alignment: AlignmentDirectional.centerStart,
+                    //   child: Padding(
+                    //     padding: const EdgeInsetsDirectional.only(
+                    //       start: 10,
+                    //       end: 235,
+                    //     ),
+                    //     child: Row(
+                    //       children: [
+                    //         Text(
+                    //           TranslationKeys.inProgressTitle.tr,
+                    //           style: TextStyle(
+                    //             fontSize: 18,
+                    //             fontWeight: FontWeight.w300,
+                    //             color: AppColors.black,
+                    //           ),
+                    //         ),
+                    //         SizedBox(width: 10),
+                    //         Container(
+                    //           // alignment: Alignment.center,
+                    //           width: 20,
+                    //           height: 20,
+                    //           decoration: BoxDecoration(
+                    //             color: AppColors.containerBackgroundColor,
+                    //             borderRadius: BorderRadius.circular(10),
+                    //             // shape: BoxShape.circle,
+                    //           ),
+
+                    //           child: Text(
+                    //             textAlign: TextAlign.center,
+                    //             "5",
+                    //             style: TextStyle(
+                    //               fontSize: 14,
+                    //               fontWeight: FontWeight.w300,
+                    //               color: AppColors.primary,
+                    //             ),
+                    //           ),
                     //         ),
                     //       ],
                     //     ),

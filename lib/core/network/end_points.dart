@@ -11,8 +11,9 @@ abstract class EndPoints
     static const String getUser = 'delete_user';
     static const String changePassword = 'change_password';
     static const String refreshToken = 'refresh_token';
-    static const String updateTask = 'tasks/1';
-    static const String deleteTask = 'tasks/2';
+    static const String updateTask = 'tasks/';
+    static const String deleteTask = 'tasks/';
+//static const String refreshToken = 'refresh_token';
     // static const String getTasks = 'my_tasks';
     // static const String getTasks = 'my_tasks';
   

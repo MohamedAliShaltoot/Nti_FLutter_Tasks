@@ -14,8 +14,8 @@ import '../../../core/widgets/custom_app_bar.dart';
 import '../../../core/widgets/custom_filled_btn.dart';
 import '../../../core/widgets/custom_form_field.dart';
 import '../data/models/category_model.dart';
-import '../manager/add_task_cubit.dart';
-import '../manager/add_task_state.dart';
+import '../manager/add_task_cubit/add_task_cubit.dart';
+import '../manager/add_task_cubit/add_task_state.dart';
 
 class AddTaskView extends StatelessWidget {
   const AddTaskView({super.key});

@@ -37,6 +37,9 @@ abstract class TranslationKeys {
       " There are no tasks yet, \n Press the button \n To add New Task  ";
   //'add tasks'
   static const String addTaskTitle = 'add tasks';
+  static const String editTaskTitle = 'edit tasks';
+  static const String deleteTaskTitle = 'delete tasks';
+  static const String deleteTaskMsgTitle = 'Are you sure you want to delete this task?';
   static const String filterTaskTitle = 'filter tasks';
   static const String taskAppBarTitle = 'Current Tasks';
   static const String searchTitle = "Search... ";
