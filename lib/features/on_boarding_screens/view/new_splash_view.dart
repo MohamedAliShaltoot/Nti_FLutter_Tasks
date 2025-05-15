@@ -1,9 +1,11 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:nti_flutter_tasks/core/widgets/task_router.dart';
 import 'package:nti_flutter_tasks/features/auth/view/login_view.dart';
 import 'package:nti_flutter_tasks/features/home_screen/cubit/user_cubit.dart';
 import 'package:nti_flutter_tasks/features/home_screen/view/home_no_task_view.dart';
+import 'package:nti_flutter_tasks/features/home_screen/view/home_tasks_view.dart';
 
 import '../../../core/cache/cache_data.dart';
 import '../../../core/cache/cache_helper.dart';
@@ -32,104 +34,69 @@ class _NewSplashViewState extends State<NewSplashView> {
     navigate(context);
     
   }
-  
-  void navigate(context)async
-  {
- Future.delayed((Duration(milliseconds: 500)),
-        ()
-     {
-       // navigate to lets start view
-       CacheData.checkFirstTime = CacheHelper.getData(key: CacheKeys.checkFirstTime);
-       if(CacheData.checkFirstTime != null)
+    void navigate(context)async
+    {
+   Future.delayed((Duration(milliseconds: 500)),
+          ()
        {
-         // check is logged in
-         CacheData.accessToken = CacheHelper.getData(key: CacheKeys.refreshToken) ;
-         if(CacheData.accessToken != null)
+         // navigate to lets start view
+         CacheData.checkFirstTime = CacheHelper.getData(key: CacheKeys.checkFirstTime);
+         if(CacheData.checkFirstTime != null)
          {
-           UserCubit.get(context).getUserDataFromAPI()
-               .then((bool result)
+           // check is logged in
+           CacheData.accessToken = CacheHelper.getData(key: CacheKeys.refreshToken) ;
+           if(CacheData.accessToken != null)
            {
-             if(result) {
-               MyNavigator.goTo(screen: ()=> HomeScreen(), isReplace: true);
-             }
-             else
+             UserCubit.get(context).getUserDataFromAPI()
+                 .then((bool result)
              {
-               MyNavigator.goTo(screen: ()=> LoginScreen(), isReplace: true);
-             }
-           });
-         }
-         else
-         {
-           // goto login
-           MyNavigator.goTo(screen: ()=> LoginScreen(), isReplace: true);
-         }
-       }
-       else// first time
+               if(result) {
+                 MyNavigator.goTo(screen: ()=> HomeScreen(), isReplace: true);
+               }
+               else
+               {
+                 MyNavigator.goTo(screen: ()=> LoginScreen(), isReplace: true);
+               }
+             });
+           }
+           else
            {
-         MyNavigator.goTo(screen: ()=> StartingScreen(), isReplace: true);
-       }
-     });
-  }
+             // goto login
+             MyNavigator.goTo(screen: ()=> LoginScreen(), isReplace: true);
+           }
+         }
+         else// first time
+             {
+           MyNavigator.goTo(screen: ()=> StartingScreen(), isReplace: true);
+         }
+       });
+    }
 
+  // void navigate(context) async {
+  //   await Future.delayed(const Duration(milliseconds: 500));
+    
+  //   // Check if it's first time using the app
+  //   CacheData.checkFirstTime = CacheHelper.getData(key: CacheKeys.checkFirstTime);
+  //   if(CacheData.checkFirstTime == null) {
+  //     // First time opening app - go to starting screen
+  //     MyNavigator.goTo(screen: () => StartingScreen(), isReplace: true);
+  //     return;
+  //   }
+    
+  //   // Not first time - check if logged in
+  //   CacheData.accessToken = CacheHelper.getData(key: CacheKeys.refreshToken);
+  //   if(CacheData.accessToken == null) {
+  //     // Not logged in - go to login screen
+  //     MyNavigator.goTo(screen: () => LoginScreen(), isReplace: true);
+  //     return;
+  //   }
+    
+  //   // User is logged in - use the TaskRouter to handle navigation
+  //   // This will automatically determine which screen to show based on tasks
+  //   MyNavigator.goTo(screen: () => TaskRouter(), isReplace: true);
+  // }
   
-
-// void navigate(BuildContext context) async {
-//     await Future.delayed(const Duration(seconds: 2));
-//     final checkFirstTime = CacheHelper.getData(key: CacheKeys.checkFirstTime);
-//     // ignore: avoid_print
-//     print("🔥 checkFirstTime in Splash: $checkFirstTime");
-
-//     if (checkFirstTime != null && checkFirstTime == true) {
-//        CacheData.accessToken = CacheHelper.getData(key: CacheKeys.accessToken);
-//       if (CacheData.accessToken != null) {
-//         UserCubit.get(context).getUserDataFromApi(
-          
-//         );
-//         Navigator.pushReplacement(
-//           context,
-//           MaterialPageRoute(builder: (_) => const HomeScreen()),
-//         );
-//       } else {
-//         Navigator.pushReplacement(
-//           context,
-//           MaterialPageRoute(builder: (_) => const LoginScreen()),
-//         );
-//       }
-//     } else {
-//       Navigator.pushReplacement(
-//         context,
-//         MaterialPageRoute(builder: (_) => const StartingScreen()),
-//       );
-//     }
-//   }
-//   void navigate(context) async {
-// await Future.delayed(Duration(seconds: 2), ()         {
-//      // CacheHelper.removeData(key:  CacheKeys.checkFirstTime);
-//       // navigate to lets start view
-//       // CacheHelper.removeData(
-//       //   key: CacheKeys.checkFirstTime,
-//       // );
-//       CacheData.checkFirstTime = CacheHelper.getData(key: CacheKeys.checkFirstTime);
-//       print("🧪 checkFirstTime value: ${CacheData.checkFirstTime}");
-//       if (CacheData.checkFirstTime != null) {
-//         // check is logged in
-//         CacheData.accessToken = CacheHelper.getData(key: CacheKeys.accessToken);
-//         if (CacheData.accessToken != null) {
-//           // TODO:
-//           MyNavigator.goTo(screen: () => HomeScreen(), isReplace: true);
-//         } else {
-//           // goto login
-//           MyNavigator.goTo(screen: () => LoginScreen(), isReplace: true);
-//         }
-//       } else // first time
-//       {
-//         MyNavigator.goTo(screen: () => StartingScreen(), isReplace: true);
-//       }
-//     });
-
-//   }
-
-  @override
+    @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
@@ -157,3 +124,13 @@ class _NewSplashViewState extends State<NewSplashView> {
     );
   }
 }
+
+
+  
+
+  
+
+
+
+
+

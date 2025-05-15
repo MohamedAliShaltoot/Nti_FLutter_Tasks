@@ -94,8 +94,6 @@ import 'end_points.dart';
 //   }
 // }
 
-
-
 class ApiHelper {
   // singleton
   static final ApiHelper _instance = ApiHelper._init();
@@ -202,7 +200,7 @@ class ApiHelper {
           headers: {
             if (isProtected)
               'Authorization':
-                  'Bearer ${sendRefreshToken ? CacheHelper.getData(key: CacheKeys.refreshToken) : CacheData.accessToken}',
+                  'Bearer ${sendRefreshToken ? CacheHelper.getData(key: CacheKeys.refreshToken) : CacheHelper.getData(key: CacheKeys.accessToken) ?? CacheData.accessToken}',
           },
         ),
       ),
@@ -221,43 +219,50 @@ class ApiHelper {
         data: isFormData ? FormData.fromMap(data ?? {}) : data,
         options: Options(
           headers: {
-            if (isProtected) 'Authorization': 'Bearer ${CacheHelper.getData(key: CacheKeys.accessToken) ?? CacheData.accessToken}',
+            if (isProtected)
+              'Authorization':
+                  'Bearer ${CacheHelper.getData(key: CacheKeys.accessToken) ?? CacheData.accessToken}',
           },
         ),
       ),
     );
   }
-    Future<Response> putRequest({
-      required String endPoint,
-      Map<String, dynamic>? data,
-      bool isFormData = true,
-      bool isProtected = false,
-    }) async {
-      return await dio.put(
-        endPoint,
-        data: isFormData ? FormData.fromMap(data ?? {}) : data,
-        options: Options(
-          headers: {
-            if (isProtected) 'Authorization': 'Bearer ${CacheHelper.getData(key: CacheKeys.accessToken) ?? CacheData.accessToken}',
-          },
-        ),
-      );
-    }
 
-    Future<Response> deleteRequest({
-      required String endPoint,
-      Map<String, dynamic>? data,
-      bool isFormData = true,
-      bool isProtected = false,
-    }) async {
-      return await dio.delete(
-        endPoint,
-        data: isFormData ? FormData.fromMap(data ?? {}) : data,
-        options: Options(
-          headers: {
-            if (isProtected) 'Authorization': 'Bearer ${CacheHelper.getData(key: CacheKeys.accessToken) ?? CacheData.accessToken}',
-          },
-        ),
-      );
-    }
+  Future<Response> putRequest({
+    required String endPoint,
+    Map<String, dynamic>? data,
+    bool isFormData = true,
+    bool isProtected = false,
+  }) async {
+    return await dio.put(
+      endPoint,
+      data: isFormData ? FormData.fromMap(data ?? {}) : data,
+      options: Options(
+        headers: {
+          if (isProtected)
+            'Authorization':
+                'Bearer ${CacheHelper.getData(key: CacheKeys.accessToken) ?? CacheData.accessToken}',
+        },
+      ),
+    );
+  }
+
+  Future<Response> deleteRequest({
+    required String endPoint,
+    Map<String, dynamic>? data,
+    bool isFormData = true,
+    bool isProtected = false,
+  }) async {
+    return await dio.delete(
+      endPoint,
+      data: isFormData ? FormData.fromMap(data ?? {}) : data,
+      options: Options(
+        headers: {
+          if (isProtected)
+            'Authorization':
+                'Bearer ${CacheHelper.getData(key: CacheKeys.accessToken) ?? CacheData.accessToken}',
+        },
+      ),
+    );
+  }
 }

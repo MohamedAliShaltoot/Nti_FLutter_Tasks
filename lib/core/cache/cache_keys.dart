@@ -6,6 +6,8 @@ abstract class CacheKeys {
   static const String checkFirstTime = 'checkFirstTime';
   static const String accessToken = 'accessToken';
   static const String refreshToken = 'refreshToken';
+  static const String tasksData = 'tasksData';
+  static const String lastTasksFetchTime = 'lastTasksFetchTime';
 }
 
 

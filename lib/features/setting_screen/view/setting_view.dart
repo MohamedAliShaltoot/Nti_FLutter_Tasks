@@ -54,6 +54,27 @@ class _SettingScreenState extends State<SettingScreen> {
                     // No need for border radius here as we'll handle it in the individual containers
                     border: Border.all(color: Colors.transparent),
                   ),
+
+// BoxDecoration(
+//                               shape: BoxShape.circle,
+//                               image: DecorationImage(
+//                                 image:
+//                                     state is UserGetSuccess &&
+//                                             state.userModel.imagePath != null
+//                                         ? NetworkImage(state.userModel.imagePath!)
+//                                         : AssetImage(AppAssets.myProfileImage),
+//                                 fit: BoxFit.cover,
+//                               ),
+//                             )
+
+
+
+
+
+
+
+
+
                   child: Row(
                     children: [
                       GestureDetector(

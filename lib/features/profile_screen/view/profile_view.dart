@@ -46,7 +46,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             image: DecorationImage(
-                              image: AssetImage(AppAssets.myProfileImage),
+                              image:
+                                  state is UserGetSuccess &&
+                                          state.userModel.imagePath != null
+                                      ? NetworkImage(state.userModel.imagePath!)
+                                      : AssetImage(AppAssets.myProfileImage),
                               fit: BoxFit.cover,
                             ),
                           ),

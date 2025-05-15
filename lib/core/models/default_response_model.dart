@@ -10,9 +10,9 @@ class DefaultResponseModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['message'] = this.message;
-    data['status'] = this.status;
+    final Map<String, dynamic> data = {};
+    data['message'] = message;
+    data['status'] = status;
     return data;
   }
 }

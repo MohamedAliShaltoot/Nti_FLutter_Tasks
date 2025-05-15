@@ -27,14 +27,7 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<RegisterScreen> {
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController confirmPasswordController = TextEditingController();
-  bool isPasswordVisible = false;
-  bool isConfirmPasswordVisible = false;
-  int selectedGender = 0;
-  bool isChecked = false;
+  
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -170,7 +163,7 @@ MyNavigator.goTo(screen: () => LoginScreen(), isReplace: true);
                       validator: (value) {
                         if (value == null ||
                             value.isEmpty ||
-                            value != passwordController.text) {
+                            value != RegisterCubit.get(context).passwordController.text) {
                           return "Confirm your password";
                         }
                         return null;

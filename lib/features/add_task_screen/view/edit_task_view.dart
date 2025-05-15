@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -58,79 +60,141 @@ class _EditTaskViewState extends State<EditTaskView> {
             BlocConsumer<DeleteTaskCubit, DeleteTaskState>(
               listener: (context, state) {
                 if (state is DeleteTaskSuccess) {
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: Text(state.message),
-                  ));
-                  MyNavigator.goTo(screen: HomeTaskContentScreen(), isReplace: true);
+                  ScaffoldMessenger.of(
+                    context,
+                  ).showSnackBar(SnackBar(content: Text(state.message)));
+                  MyNavigator.goTo(
+                    screen: HomeTaskContentScreen(),
+                    isReplace: true,
+                  );
                   // AddTaskCubit.get(context).getTasks();
                 } else if (state is DeleteTaskError) {
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: Text(state.error),
-                  ));
+                  ScaffoldMessenger.of(
+                    context,
+                  ).showSnackBar(SnackBar(content: Text(state.error)));
                 }
               },
               builder: (context, state) {
                 return Padding(
                   padding: const EdgeInsetsDirectional.only(end: 10),
-                  child: Row(
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          // show hin first alert dialog to ask him you really want to delete this task?
-                          // if yes delete the task
-                          // if no do nothing
+                  child: GestureDetector(
+                    onTap: () async {
+                      if (state is DeleteTaskLoading) {
+                        return; // Prevent multiple taps while loading
+                      }
 
-                          state is DeleteTaskLoading
-                              ? CircularProgressIndicator()
-                              : 
-                          showDialog(
-                            context: context,
-                            builder:
-                                (context) => AlertDialog(
-                                  title: Text(
+                      // Show the dialog and wait for result
+                      final shouldDelete = await showDialog<bool>(
+                        context: context,
+                        builder:
+                            (context) => AlertDialog(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              backgroundColor: Colors.white,
+                              elevation: 8,
+                              title: Column(
+                                children: [
+                                  Icon(
+                                    Icons.warning_amber_rounded,
+                                    color: AppColors.red,
+                                    size: 48,
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Text(
                                     TranslationKeys.deleteTaskTitle.tr,
-                                  ),
-                                  content: Text(
-                                    "Are you sure you want to delete this task?",
-                                  ),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                      },
-                                      child: Text("Cancel"),
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black87,
                                     ),
-                                    TextButton(
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                      },
-                                      child: Text("Delete"),
-                                    ),
-                                  ],
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ],
+                              ),
+                              content: Text(
+                                "Are you sure you want to delete this task?",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.black54,
                                 ),
-                          );
-                          DeleteTaskCubit.get(context).onDeleteBtnPressed(
-                            EditTaskCubit.id,
-                            // DeleteTaskCubit.idTask,
-                          );
-                        },
-                        child: setSvgPicture(
+                                textAlign: TextAlign.center,
+                              ),
+                              actionsAlignment: MainAxisAlignment.center,
+                              actions: [
+                                ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.pop(
+                                      context,
+                                      false,
+                                    ); // Return false - don't delete
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.grey.shade200,
+                                    foregroundColor: Colors.black87,
+                                    elevation: 0,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 20,
+                                      vertical: 10,
+                                    ),
+                                  ),
+                                  child: Text("Cancel"),
+                                ),
+                                SizedBox(width: 10),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.pop(
+                                      context,
+                                      true,
+                                    ); // Return true - delete the task
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: AppColors.red,
+                                    foregroundColor: Colors.white,
+                                    elevation: 0,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 20,
+                                      vertical: 10,
+                                    ),
+                                  ),
+                                  child: Text("Delete"),
+                                ),
+                              ],
+                            ),
+                      );
+
+                      // If user confirmed deletion
+                      if (shouldDelete == true) {
+                        DeleteTaskCubit.get(
+                          context,
+                        ).onDeleteBtnPressed(EditTaskCubit.id);
+                      }
+                    },
+                    child: Row(
+                      children: [
+                        setSvgPicture(
                           assetPath: AppAssets.deleteIcon,
                           width: 20,
                           height: 20,
                           color: AppColors.red,
                         ),
-                      ),
-                      SizedBox(width: 10),
-                      Text(
-                        TranslationKeys.deleteTaskTitle.tr,
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w300,
-                          color: AppColors.red,
+                        SizedBox(width: 10),
+                        Text(
+                          TranslationKeys.deleteTaskTitle.tr,
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w300,
+                            color: AppColors.red,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 );
               },
@@ -142,7 +206,10 @@ class _EditTaskViewState extends State<EditTaskView> {
           child: BlocConsumer<EditTaskCubit, EditTaskState>(
             listener: (context, state) {
               if (state is EditTaskSuccessState) {
-                 MyNavigator.goTo(screen: HomeTaskContentScreen(), isReplace: true);
+                MyNavigator.goTo(
+                  screen: HomeTaskContentScreen(),
+                  isReplace: true,
+                );
               }
             },
             builder: (context, state) {

@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:nti_flutter_tasks/core/helper/my_navigator.dart';
+import 'package:nti_flutter_tasks/core/widgets/custom_circular_progress.dart';
+import 'package:nti_flutter_tasks/features/home_screen/view/home_tasks_view.dart';
 
 import '../../../core/helper/my_responsive.dart';
 import '../../../core/helper/my_validator.dart';
@@ -25,7 +28,6 @@ class AddTaskView extends StatelessWidget {
     return BlocProvider(
       create: (context) => AddTaskCubit(),
       child: Scaffold(
-       
         appBar: CustomAppBar(
           title: TranslationKeys.addTaskTitle.tr,
           leading: IconButton(
@@ -42,15 +44,17 @@ class AddTaskView extends StatelessWidget {
               ScaffoldMessenger.of(
                 context,
               ).showSnackBar(SnackBar(content: Text(state.message)));
-              Navigator.pop(context);
-             // AddTaskCubit.get(context).getTasks();
-              
+              MyNavigator.goTo(
+                screen: HomeTaskContentScreen(),
+                isReplace: true,
+              );
+              // Navigator.pop(context);
+              // AddTaskCubit.get(context).getTasks();
             } else if (state is AddTaskErrorState) {
               ScaffoldMessenger.of(
                 context,
               ).showSnackBar(SnackBar(content: Text(state.error)));
             }
-
           },
           builder: (context, state) {
             return Padding(
@@ -63,7 +67,7 @@ class AddTaskView extends StatelessWidget {
                       padding: EdgeInsets.symmetric(horizontal: 40),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(20),
-                
+
                         child: InkWell(
                           onTap: () {
                             AddTaskCubit.get(context).pickImage();
@@ -75,7 +79,9 @@ class AddTaskView extends StatelessWidget {
                                 // state is AddTaskChangeImageState?
                                 AddTaskCubit.get(context).image != null
                                     ? Image.file(
-                                      File(AddTaskCubit.get(context).image!.path),
+                                      File(
+                                        AddTaskCubit.get(context).image!.path,
+                                      ),
                                       fit: BoxFit.cover,
                                     )
                                     : Image.asset(
@@ -95,7 +101,8 @@ class AddTaskView extends StatelessWidget {
                     CustomFormField(
                       label: TranslationKeys.description.tr,
                       validator: RequiredValidator(),
-                      controller: AddTaskCubit.get(context).descriptionController,
+                      controller:
+                          AddTaskCubit.get(context).descriptionController,
                     ),
                     SizedBox(height: 20),
                     DropdownButtonFormField<CategoryModel>(
@@ -126,15 +133,17 @@ class AddTaskView extends StatelessWidget {
                         }
                       },
                     ),
-                
+
                     SizedBox(height: 20),
-                     state is AddTaskLoadingState ? Center(child: CircularProgressIndicator(),):
-                      CustomFilledBtn(onPressed: (){AddTaskCubit.get(context).onAddTaskPressed();
-                       AddTaskCubit.get(context).getTasks();
-                      
-                      }, text: 'Add Task'),
-                  
-                     
+                    state is AddTaskLoadingState
+                        ? Center(child: CustomCircularProgressIndicator())
+                        : CustomFilledBtn(
+                          onPressed: () {
+                            AddTaskCubit.get(context).onAddTaskPressed();
+                            AddTaskCubit.get(context).getTasks();
+                          },
+                          text: 'Add Task',
+                        ),
                   ],
                 ),
               ),

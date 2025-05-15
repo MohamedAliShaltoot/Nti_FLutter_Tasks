@@ -6,6 +6,7 @@ import 'package:nti_flutter_tasks/core/helper/my_navigator.dart';
 import 'package:nti_flutter_tasks/core/widgets/custom_circular_progress.dart';
 import 'package:nti_flutter_tasks/features/change_password_screen/manager/change_password_cubit/change_password_cubit.dart';
 import 'package:nti_flutter_tasks/features/change_password_screen/manager/change_password_cubit/change_password_state.dart';
+import 'package:nti_flutter_tasks/features/profile_screen/view/profile_view.dart';
 import 'package:nti_flutter_tasks/features/setting_screen/view/setting_view.dart';
 
 import '../../../core/translation/translation_keys.dart';
@@ -35,7 +36,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text("User information updated successfully")),
             );
-            MyNavigator.goTo(screen: SettingScreen(), isReplace: true);
+            MyNavigator.goTo(screen: ProfileScreen(), isReplace: true);
           } else if (state is ChangePasswordErrorState) {
             Get.snackbar(
               "Error",

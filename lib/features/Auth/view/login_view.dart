@@ -2,6 +2,7 @@ import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:nti_flutter_tasks/core/widgets/custom_circular_progress.dart';
 
 import '../../../core/helper/awssome_snack_bar.dart';
 import '../../../core/helper/my_navigator.dart';
@@ -79,14 +80,7 @@ class LoginScreen extends StatelessWidget {
 
                     const SizedBox(height: 23),
                     state is LoginLoading
-                        ? const CircularProgressIndicator(
-                            color: Colors.blue,
-                            strokeWidth: 2,
-                            semanticsLabel: 'Loading',
-                            semanticsValue: 'Loading',
-                            backgroundColor: Colors.white,
-                            
-                        )
+                        ? CustomCircularProgressIndicator()
                         : CustomelEvatedbutton.getElevatedButton(
                           onTap: LoginCubit.get(context).onLoginPressed,
                           title: TranslationKeys.login.tr,
