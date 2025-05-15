@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:nti_flutter_tasks/core/helper/my_logger.dart';
+import 'package:nti_flutter_tasks/core/widgets/app_language_provider.dart';
 import 'package:nti_flutter_tasks/features/add_task_screen/data/repo/tasks_repo.dart';
 import 'package:nti_flutter_tasks/features/add_task_screen/manager/add_task_cubit/add_task_cubit.dart';
 import 'package:nti_flutter_tasks/features/add_task_screen/manager/delete_task_cubit/delete_task_cubit.dart';
 import 'package:nti_flutter_tasks/features/add_task_screen/manager/edit_task_cubit/edit_task_cubit.dart';
+import 'package:nti_flutter_tasks/features/setting_screen/manager/change_language_cubit/change_language_cubit.dart';
 
 import 'core/cache/cache_data.dart';
 import 'core/cache/cache_helper.dart';
@@ -44,6 +46,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocListener(
       listeners: [
+       // BlocProvider(create: (context) =>  LanguageCubit()),
         BlocProvider(create: (context) => UserCubit()),
         BlocProvider(create: (context) => EditTaskCubit()),
         BlocProvider(
