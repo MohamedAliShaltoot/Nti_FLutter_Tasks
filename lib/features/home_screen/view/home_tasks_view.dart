@@ -240,24 +240,27 @@ class HomeTaskContentScreen extends StatelessWidget {
                                     child: Dismissible(
                                       key: Key(task.id.toString()),
                                       background: Container(
-                                        color: AppColors.primary,
-                                        alignment: Alignment.centerLeft,
+                                        color: AppColors.lightPink,
+                                        alignment: Alignment.center,
                                         child: const Icon(
                                           Icons.delete,
                                           color: AppColors.red,
+                                          size: 40,
                                         ),
                                       ),
                                       secondaryBackground: Container(
-                                        color: AppColors.primary,
-                                        alignment: Alignment.centerRight,
+                                        color: AppColors.lightPink,
+                                        alignment: Alignment.center,
                                         child: const Icon(
                                           Icons.delete,
                                           color: AppColors.red,
+                                          size: 40,
                                         ),
                                       ),
                                       onDismissed: (direction) {
                                         if (direction ==
-                                            DismissDirection.startToEnd || direction ==
+                                                DismissDirection.startToEnd ||
+                                            direction ==
                                                 DismissDirection.endToStart) {
                                           // Handle left swipe
                                           DeleteTaskCubit.get(
@@ -286,8 +289,6 @@ class HomeTaskContentScreen extends StatelessWidget {
                                         //         ),
                                         //   );
                                         // }
-
-
 
                                         //  DeleteTaskCubit.get(context).onDeleteBtnPressed(
                                         //   task.id,);
