@@ -244,15 +244,15 @@ class HomeTaskContentScreen extends StatelessWidget {
                                         alignment: Alignment.centerLeft,
                                         child: const Icon(
                                           Icons.delete,
-                                          color: Colors.white,
+                                          color: AppColors.red,
                                         ),
                                       ),
                                       secondaryBackground: Container(
                                         color: AppColors.primary,
                                         alignment: Alignment.centerRight,
                                         child: const Icon(
-                                          Icons.edit,
-                                          color: Colors.white,
+                                          Icons.delete,
+                                          color: AppColors.red,
                                         ),
                                       ),
                                       onDismissed: (direction) {
