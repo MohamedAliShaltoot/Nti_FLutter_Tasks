@@ -64,5 +64,11 @@ abstract class TranslationKeys {
        static const String titleInHomeContainer =
       'Your today’s tasks \n almost done!';
 
+  static const String cancelBtnTitle = "Cancel";
+  static const String deleteBtnTitle = "Delete";
+   static const String updateBtnTitle = "Update"; 
+    static const String logoutBtnTitle = "LogOut"; 
+
+
 
 }

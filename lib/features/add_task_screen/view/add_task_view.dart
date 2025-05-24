@@ -4,8 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:nti_flutter_tasks/core/cache/cache_helper.dart';
+import 'package:nti_flutter_tasks/core/cache/cache_keys.dart';
 import 'package:nti_flutter_tasks/core/helper/my_navigator.dart';
 import 'package:nti_flutter_tasks/core/widgets/custom_circular_progress.dart';
+import 'package:nti_flutter_tasks/core/widgets/custom_svg_picture.dart';
 import 'package:nti_flutter_tasks/features/home_screen/view/home_tasks_view.dart';
 
 import '../../../core/helper/my_responsive.dart';
@@ -25,6 +28,7 @@ class AddTaskView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isAr = CacheHelper.getData(key: CacheKeys.langKey) == CacheKeys.keyAR;
     return BlocProvider(
       create: (context) => AddTaskCubit(),
       child: Scaffold(
@@ -35,7 +39,9 @@ class AddTaskView extends StatelessWidget {
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: SvgPicture.asset(AppAssets.goBackIcon),
+            icon: isAr
+                        ? CustomSvg(path: AppAssets.rightIcon)
+                        : CustomSvg(path: AppAssets.leftIcon),
           ),
         ),
         body: BlocConsumer<AddTaskCubit, AddTaskState>(
@@ -142,7 +148,7 @@ class AddTaskView extends StatelessWidget {
                             AddTaskCubit.get(context).onAddTaskPressed();
                             AddTaskCubit.get(context).getTasks();
                           },
-                          text: 'Add Task',
+                          text: TranslationKeys.addTaskTitle.tr,
                         ),
                   ],
                 ),

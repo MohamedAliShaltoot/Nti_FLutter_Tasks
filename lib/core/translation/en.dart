@@ -41,6 +41,9 @@ Map<String, String> en = {
   TranslationKeys.personalTaskSubTitle: "Improve my English skills\n by trying to speak",
   TranslationKeys.homeTaskSubTitle: "Add new feature for Do It \n app and commit it",
    TranslationKeys.titleInHomeContainer: 'Your today’s tasks \n almost done!',
+  TranslationKeys.cancelBtnTitle: "Cancel",
+  TranslationKeys.deleteBtnTitle: "Delete",
+  TranslationKeys.updateBtnTitle: "Update",
   
 
 

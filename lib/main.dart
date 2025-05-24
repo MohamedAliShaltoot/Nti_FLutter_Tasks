@@ -8,6 +8,8 @@ import 'package:nti_flutter_tasks/features/add_task_screen/manager/add_task_cubi
 import 'package:nti_flutter_tasks/features/add_task_screen/manager/delete_task_cubit/delete_task_cubit.dart';
 import 'package:nti_flutter_tasks/features/add_task_screen/manager/edit_task_cubit/edit_task_cubit.dart';
 import 'package:nti_flutter_tasks/features/setting_screen/manager/change_language_cubit/change_language_cubit.dart';
+import 'package:nti_flutter_tasks/features/setting_screen/manager/theme_cubit/theme_cubit.dart';
+import 'package:nti_flutter_tasks/features/setting_screen/manager/theme_cubit/theme_state.dart';
 
 import 'core/cache/cache_data.dart';
 import 'core/cache/cache_helper.dart';
@@ -46,7 +48,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocListener(
       listeners: [
-       // BlocProvider(create: (context) =>  LanguageCubit()),
+        BlocProvider<ThemeCubit>(create: (context) => ThemeCubit()),
         BlocProvider(create: (context) => UserCubit()),
         BlocProvider(create: (context) => EditTaskCubit()),
         BlocProvider(
@@ -56,19 +58,25 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => DeleteTaskCubit()),
       ],
 
-      child: GetMaterialApp(
-        locale: Locale(CacheData.lang!),
-        translations: TranslationHelper(),
-        debugShowCheckedModeBanner: false,
-        title: AppStrings.appTitle,
-        theme: ThemeData(
-          scaffoldBackgroundColor: AppColors.scaffoldBackground,
-          fontFamily: AppStrings.fontFamily,
-        ),
-        //HomeScreen
-        //NewSplashView
-        home: NewSplashView(),
-        // problem was in call splashScreen not NewSplashView
+      child: BlocBuilder<ThemeCubit, ThemeState>(
+        builder: (context, state) {
+          return GetMaterialApp(
+            locale: Locale(CacheData.lang!),
+            translations: TranslationHelper(),
+            debugShowCheckedModeBanner: false,
+            title: AppStrings.appTitle,
+            theme:
+                state.isDarkMode ? ThemeCubit.darkTheme : ThemeCubit.lightTheme,
+            // theme: ThemeData(
+            //   scaffoldBackgroundColor: AppColors.scaffoldBackground,
+            //   fontFamily: AppStrings.fontFamily,
+            // ),
+            //HomeScreen
+            //NewSplashView
+            home: NewSplashView(),
+            // problem was in call splashScreen not NewSplashView
+          );
+        },
       ),
     );
   }

@@ -20,17 +20,14 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   // double width = MediaQuery.of(context).size.width;
+    // double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return BlocConsumer<UserCubit, UserState>(
-      listener:(context, state){
+      listener: (context, state) {
         if (state is UserError) {
-          MyNavigator.goTo(
-            screen: () => const LoginScreen(),
-            isReplace: true
-          );
+          MyNavigator.goTo(screen: () => const LoginScreen(), isReplace: true);
         }
-      } ,
+      },
       builder: (context, state) {
         return Scaffold(
           floatingActionButton: FloatingActionButton(
@@ -51,10 +48,17 @@ class HomeScreen extends StatelessWidget {
               //   ),
               // );
             },
-            child: setSvgPicture(
+            child:
+            //  CustomSvg(
+            //   path: AppAssets.paperPlusIcon,
+            //   width: 24,
+            //   height: 24,
+            // ),
+            setSvgPicture(
               assetPath: AppAssets.paperPlusIcon,
               width: 24,
               height: 24,
+              color: AppColors.white,
             ),
           ),
           body: SafeArea(
@@ -85,17 +89,14 @@ class HomeScreen extends StatelessWidget {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           image: DecorationImage(
-
-image: state is UserGetSuccess &&
-                          state.userModel.imagePath!=null?
-                          NetworkImage(state.userModel.imagePath!)
-                            :
-
-
-
-                               AssetImage(AppAssets.myProfileImage),
-                              fit: BoxFit.cover,
-                            ),)
+                            image:
+                                state is UserGetSuccess &&
+                                        state.userModel.imagePath != null
+                                    ? NetworkImage(state.userModel.imagePath!)
+                                    : AssetImage(AppAssets.myProfileImage),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                       ),
                     ),
                     Expanded(
@@ -138,7 +139,8 @@ image: state is UserGetSuccess &&
                   ),
                 ),
                 SizedBox(height: 39),
-                CustomSvg(path: AppAssets.noTaskImage,
+                CustomSvg(
+                  path: AppAssets.noTaskImage,
                   width: MyResponsive.width(context, value: 304.96),
                   height: MyResponsive.height(
                     context,

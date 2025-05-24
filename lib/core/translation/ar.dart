@@ -50,6 +50,9 @@ Map<String, String> ar =
   TranslationKeys.homeTaskSubTitle: "إضافة ميزة جديدة لتطبيق Do It \n والقيام بالتزامها",
   TranslationKeys.titleInHomeContainer:
       'مهامك اليوم \n على وشك الانتهاء!',
+  TranslationKeys.cancelBtnTitle: "إلغاء",
+  TranslationKeys.deleteBtnTitle: "حذف",
+  TranslationKeys.updateBtnTitle: "تحديث",
 
 
 

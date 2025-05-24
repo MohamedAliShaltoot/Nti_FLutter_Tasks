@@ -15,6 +15,17 @@ abstract class AppAssets {
   static const String settingsIcon = "${basePath}Setting.svg";
   static const String paperPlusIcon = "${basePath}paper_plus_icon.svg";
   static const String goBackIcon = "${basePath}go_back_icon.svg";
+
+
+
+static const String leftIcon = '${basePath}icon_left.svg';
+  static const String rightIcon = '${basePath}icon_right_copy.svg';
+  static const String logOutIcon = '${basePath}log_out_icon.svg';
+
+
+
+
+
   static const String workShopIcon = "${basePath}work_shop_icon.svg";
   static const String homeIcon = "${basePath}home_icon.svg";
   static const String personalGreenIcon = "${basePath}personal_green.svg";

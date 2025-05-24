@@ -72,29 +72,7 @@ class _NewSplashViewState extends State<NewSplashView> {
        });
     }
 
-  // void navigate(context) async {
-  //   await Future.delayed(const Duration(milliseconds: 500));
-    
-  //   // Check if it's first time using the app
-  //   CacheData.checkFirstTime = CacheHelper.getData(key: CacheKeys.checkFirstTime);
-  //   if(CacheData.checkFirstTime == null) {
-  //     // First time opening app - go to starting screen
-  //     MyNavigator.goTo(screen: () => StartingScreen(), isReplace: true);
-  //     return;
-  //   }
-    
-  //   // Not first time - check if logged in
-  //   CacheData.accessToken = CacheHelper.getData(key: CacheKeys.refreshToken);
-  //   if(CacheData.accessToken == null) {
-  //     // Not logged in - go to login screen
-  //     MyNavigator.goTo(screen: () => LoginScreen(), isReplace: true);
-  //     return;
-  //   }
-    
-  //   // User is logged in - use the TaskRouter to handle navigation
-  //   // This will automatically determine which screen to show based on tasks
-  //   MyNavigator.goTo(screen: () => TaskRouter(), isReplace: true);
-  // }
+
   
     @override
   Widget build(BuildContext context) {
@@ -134,3 +112,26 @@ class _NewSplashViewState extends State<NewSplashView> {
 
 
 
+  // void navigate(context) async {
+  //   await Future.delayed(const Duration(milliseconds: 500));
+    
+  //   // Check if it's first time using the app
+  //   CacheData.checkFirstTime = CacheHelper.getData(key: CacheKeys.checkFirstTime);
+  //   if(CacheData.checkFirstTime == null) {
+  //     // First time opening app - go to starting screen
+  //     MyNavigator.goTo(screen: () => StartingScreen(), isReplace: true);
+  //     return;
+  //   }
+    
+  //   // Not first time - check if logged in
+  //   CacheData.accessToken = CacheHelper.getData(key: CacheKeys.refreshToken);
+  //   if(CacheData.accessToken == null) {
+  //     // Not logged in - go to login screen
+  //     MyNavigator.goTo(screen: () => LoginScreen(), isReplace: true);
+  //     return;
+  //   }
+    
+  //   // User is logged in - use the TaskRouter to handle navigation
+  //   // This will automatically determine which screen to show based on tasks
+  //   MyNavigator.goTo(screen: () => TaskRouter(), isReplace: true);
+  // }

@@ -51,4 +51,20 @@ LoginResponseModel loginResponseModel = LoginResponseModel.fromJson(
       return Left(e.toString());
     }
   }
+    Future<Either<String, String>> deleteAccount() async {
+    try {
+      ApiResponse apiResponse = (await apiHelper.deleteRequest(
+        endPoint: EndPoints.deleteUser,
+        isProtected: true,
+      )) as ApiResponse;
+      if (apiResponse.status) {
+        return Right(apiResponse.message);
+      } else {
+        throw Exception(apiResponse.message);
+      }
+    } catch (e) {
+      ApiResponse apiResponse = ApiResponse.fromError(e);
+      return Left(apiResponse.message);
+    }
+  }
 }

@@ -37,6 +37,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^9.1.0
+  flutter_chat_bubble: ^2.0.2
   flutter_svg: ^2.0.16
   get: ^4.7.2
   image_picker: ^1.1.2

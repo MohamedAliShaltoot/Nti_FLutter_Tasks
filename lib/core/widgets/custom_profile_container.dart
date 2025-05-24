@@ -1,5 +1,11 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:nti_flutter_tasks/core/cache/cache_data.dart';
+import 'package:nti_flutter_tasks/core/cache/cache_helper.dart';
+import 'package:nti_flutter_tasks/core/cache/cache_keys.dart';
+import 'package:nti_flutter_tasks/core/widgets/custom_svg_picture.dart';
 
 import '../utils/app_assets.dart';
 import '../utils/app_colors.dart';
@@ -10,6 +16,7 @@ class CustomProfileContainer {
     required String profileNameSettings,
     required void Function()? onPressed,
   }) {
+    bool isAr = CacheHelper.getData(key: CacheKeys.langKey) == CacheKeys.keyAR;
     return Container(
       width: 361,
       height: 63,
@@ -38,11 +45,10 @@ class CustomProfileContainer {
 
           IconButton(
             onPressed: onPressed,
-            icon: SvgPicture.asset(
-              AppAssets.goOpenIcoon,
-              width: 25,
-              height: 25,
-            ),
+            icon:
+                !isAr
+                    ? CustomSvg(path: AppAssets.rightIcon)
+                    : CustomSvg(path: AppAssets.leftIcon),
           ),
         ],
       ),

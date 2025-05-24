@@ -1,5 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:nti_flutter_tasks/core/cache/cache_data.dart';
+import 'package:nti_flutter_tasks/core/cache/cache_helper.dart';
+import 'package:nti_flutter_tasks/core/cache/cache_keys.dart';
 import 'package:nti_flutter_tasks/features/add_task_screen/data/models/get_task_response_model.dart';
 import 'package:nti_flutter_tasks/features/add_task_screen/data/repo/tasks_repo.dart';
 
@@ -37,6 +40,29 @@ class UserCubit extends Cubit<UserState> {
         return true;
       },
     );
+  }
+   void deleteAccount() async {
+    emit(UserDeleteLoadingState());
+    var result = await HomeRepo().deleteAccount();
+    result.fold(
+      (error) {
+        emit(UserDeleteErrorState(error));
+      },
+      (message) {
+        logOut();
+        emit(UserDeleteSuccessState(message));
+      },
+    );
+  }
+
+  void logOut() async {
+    await CacheHelper.removeData(key: CacheKeys.accessToken);
+    CacheData.accessToken = null;
+    await CacheHelper.removeData(key: CacheKeys.refreshToken);
+    CacheData.refreshToken = null;
+    await CacheHelper.removeData(key: CacheKeys.loggedIn);
+    CacheData.loggedIn = null;
+    emit(UserLogoutState('Logged out successfully'));
   }
 
   // making updates to handel requests

@@ -36,7 +36,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text("User information updated successfully")),
             );
-            MyNavigator.goTo(screen: ProfileScreen(), isReplace: true);
+            MyNavigator.goTo(screen: ProfileScreen(), isReplace: false);
           } else if (state is ChangePasswordErrorState) {
             Get.snackbar(
               "Error",

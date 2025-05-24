@@ -8,6 +8,7 @@ abstract class CacheKeys {
   static const String refreshToken = 'refreshToken';
   static const String tasksData = 'tasksData';
   static const String lastTasksFetchTime = 'lastTasksFetchTime';
+  static String loggedIn = 'loggedIn';
 }
 
 

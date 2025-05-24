@@ -7,13 +7,19 @@ Widget? customFloatingButton({
   required VoidCallback onPress,
   required String pathIcon,
   required String toolTip,
+  Color color = AppColors.white,
 }) {
   return FloatingActionButton(
-   // autofocus: true,
+    // autofocus: true,
     tooltip: toolTip,
     shape: const CircleBorder(),
     backgroundColor: AppColors.primary,
     onPressed: onPress,
-    child: setSvgPicture(assetPath: pathIcon, width: 24, height: 24),
+    child: setSvgPicture(
+      assetPath: pathIcon,
+      width: 24,
+      height: 24,
+      color: color,
+    ),
   );
 }

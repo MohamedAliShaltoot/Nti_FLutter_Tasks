@@ -2,17 +2,23 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_chat_bubble/chat_bubble.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:intl/intl.dart';
 import 'package:nti_flutter_tasks/core/helper/my_navigator.dart';
+import 'package:nti_flutter_tasks/core/helper/my_snackbar.dart';
+import 'package:nti_flutter_tasks/core/helper/nav_helper.dart';
+import 'package:nti_flutter_tasks/core/helper/svg_picture_custom.dart';
 import 'package:nti_flutter_tasks/features/add_task_screen/data/repo/tasks_repo.dart';
 import 'package:nti_flutter_tasks/features/add_task_screen/manager/add_task_cubit/add_task_cubit.dart';
 import 'package:nti_flutter_tasks/features/add_task_screen/manager/add_task_cubit/add_task_state.dart';
 import 'package:nti_flutter_tasks/features/add_task_screen/manager/delete_task_cubit/delete_task_cubit.dart';
 import 'package:nti_flutter_tasks/features/add_task_screen/manager/edit_task_cubit/edit_task_cubit.dart';
 import 'package:nti_flutter_tasks/features/add_task_screen/view/edit_task_view.dart';
+import 'package:nti_flutter_tasks/features/auth/view/login_view.dart';
 import 'package:nti_flutter_tasks/features/profile_screen/view/profile_view.dart';
+import 'package:nti_flutter_tasks/features/setting_screen/view/widgets/custom_profile_settings.dart';
 
 import '../../../core/helper/my_responsive.dart';
 import '../../../core/translation/translation_keys.dart';
@@ -74,6 +80,8 @@ class HomeTaskContentScreen extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     // buildProfileHeader(context: context),
                     Row(
@@ -135,6 +143,29 @@ class HomeTaskContentScreen extends StatelessWidget {
                                   ),
                                 ),
                             ],
+                          ),
+                        ),
+                        // SizedBox(width: 150),
+                        SizedBox(
+                          width: 100,
+                          child: BlocConsumer<UserCubit, UserState>(
+                            listener: (context, state) {
+                              if (state is UserLogoutState) {
+                                MySnackbar.success(context, state.message);
+                                NavHelper.pushReplaceAll(() => LoginScreen());
+                              }
+                            },
+                            builder: (context, state) {
+                              return customProfileSettings(
+                                title: "",
+                                iconPath: AppAssets.logOutIcon,
+                                context: context,
+                                isTrailing: false,
+                                onTap: () {
+                                  UserCubit.get(context).logOut();
+                                },
+                              );
+                            },
                           ),
                         ),
                       ],
@@ -216,7 +247,7 @@ class HomeTaskContentScreen extends StatelessWidget {
                                   return GestureDetector(
                                     onTap: () {
                                       //print id
-                                      // ignore: avoid_print
+
                                       print('Task ID/${task.id}');
                                       EditTaskCubit.id = task.id!;
                                       EditTaskCubit.InitialTitleController =
@@ -241,20 +272,50 @@ class HomeTaskContentScreen extends StatelessWidget {
                                       key: Key(task.id.toString()),
                                       background: Container(
                                         color: AppColors.lightPink,
-                                        alignment: Alignment.center,
-                                        child: const Icon(
-                                          Icons.delete,
-                                          color: AppColors.red,
-                                          size: 40,
+                                        alignment: Alignment.centerRight,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
+                                          children: [
+                                            Text(
+                                              TranslationKeys.deleteBtnTitle.tr,
+                                              style: TextStyle(
+                                                color: AppColors.red,
+                                                fontSize: 20,
+                                              ),
+                                            ),
+                                            // const SizedBox(width: 10),
+                                            setSvgPicture(
+                                              assetPath: AppAssets.deleteIcon,
+                                              width: 25,
+                                              height: 25,
+                                              color: AppColors.red,
+                                            ),
+                                          ],
                                         ),
                                       ),
                                       secondaryBackground: Container(
-                                        color: AppColors.lightPink,
-                                        alignment: Alignment.center,
-                                        child: const Icon(
-                                          Icons.delete,
-                                          color: AppColors.red,
-                                          size: 40,
+                                        color: AppColors.scaffoldBackground,
+                                        alignment: Alignment.centerLeft,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
+                                          children: [
+                                            Text(
+                                              TranslationKeys.deleteBtnTitle.tr,
+                                              style: TextStyle(
+                                                color: AppColors.red,
+                                                fontSize: 20,
+                                              ),
+                                            ),
+                                            // const SizedBox(width: 10),
+                                            setSvgPicture(
+                                              assetPath: AppAssets.deleteIcon,
+                                              width: 25,
+                                              height: 25,
+                                              color: AppColors.red,
+                                            ),
+                                          ],
                                         ),
                                       ),
                                       onDismissed: (direction) {
@@ -301,32 +362,20 @@ class HomeTaskContentScreen extends StatelessWidget {
                                         //     ),
                                         //   );
                                       },
-                                      child: Container(
-                                        height: 100,
-                                        margin: const EdgeInsets.symmetric(
-                                          vertical: 8,
-                                          horizontal: 10,
+
+                                      child: ChatBubble(
+                                        clipper: ChatBubbleClipper10(
+                                          type: BubbleType.receiverBubble,
                                         ),
-                                        decoration: BoxDecoration(
-                                          color:
-                                              AppColors
-                                                  .containerBackgroundColor,
-                                          borderRadius: BorderRadius.circular(
-                                            15,
-                                          ),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: AppColors.gray,
-                                              blurRadius: 5,
-                                              offset: const Offset(0, 3),
-                                            ),
-                                          ],
-                                        ),
+                                        alignment: Alignment.topRight,
+                                        margin: const EdgeInsets.only(top: 20),
+                                        backGroundColor: Colors.blue,
                                         child: ListTile(
                                           title: Text(
                                             task.title ?? '',
                                             style: TextStyle(
                                               fontWeight: FontWeight.w300,
+                                              color: AppColors.black,
                                             ),
                                             maxLines: 1,
                                             overflow: TextOverflow.ellipsis,
@@ -335,20 +384,28 @@ class HomeTaskContentScreen extends StatelessWidget {
                                             padding: const EdgeInsets.only(
                                               top: 18,
                                             ),
-                                            child: Text(task.description ?? ''),
+                                            child: Text(
+                                              task.description ?? '',
+                                              style: TextStyle(
+                                                color: AppColors.black,
+                                              ),
+                                            ),
                                           ),
                                           trailing: Column(
                                             children: [
                                               Text(
                                                 fullDate, // "Wed, 14 May 2025"
-                                                // style: TextStyle(fontSize: 20),
+                                                style: TextStyle(
+                                                  //fontSize: 20,
+                                                  color: AppColors.black,
+                                                ),
                                               ),
                                               SizedBox(height: 8),
                                               Text(
                                                 time, // "03:34:24"
                                                 style: TextStyle(
                                                   // fontSize: 18,
-                                                  color: Colors.grey[600],
+                                                  color: AppColors.black,
                                                 ),
                                               ),
                                             ],

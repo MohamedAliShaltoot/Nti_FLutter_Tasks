@@ -1,12 +1,19 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get_utils/get_utils.dart';
+import 'package:nti_flutter_tasks/core/cache/cache_data.dart';
+import 'package:nti_flutter_tasks/core/cache/cache_helper.dart';
+import 'package:nti_flutter_tasks/core/cache/cache_keys.dart';
 import 'package:nti_flutter_tasks/core/helper/my_navigator.dart';
 import 'package:nti_flutter_tasks/core/translation/translation_keys.dart';
 import 'package:nti_flutter_tasks/core/widgets/custom_app_bar.dart';
+import 'package:nti_flutter_tasks/core/widgets/custom_circular_progress.dart';
+import 'package:nti_flutter_tasks/core/widgets/custom_svg_picture.dart';
 import 'package:nti_flutter_tasks/features/add_task_screen/data/models/get_task_response_model.dart';
 import 'package:nti_flutter_tasks/features/add_task_screen/manager/delete_task_cubit/delete_task_cubit.dart';
 import 'package:nti_flutter_tasks/features/add_task_screen/manager/delete_task_cubit/delete_task_state.dart';
@@ -32,6 +39,8 @@ class EditTaskView extends StatefulWidget {
 
 class _EditTaskViewState extends State<EditTaskView> {
   late EditTaskCubit editTaskCubit;
+  bool isAr = CacheHelper.getData(key: CacheKeys.langKey) == CacheKeys.keyAR;
+  
 
   @override
   Widget build(BuildContext context) {
@@ -49,12 +58,9 @@ class _EditTaskViewState extends State<EditTaskView> {
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: SvgPicture.asset(
-              AppAssets.goBackIcon,
-              //  color: AppColors.black,
-              width: 21,
-              height: 21,
-            ),
+            icon:isAr
+                        ? CustomSvg(path: AppAssets.rightIcon)
+                        : CustomSvg(path: AppAssets.leftIcon),
           ),
           actions: [
             BlocConsumer<DeleteTaskCubit, DeleteTaskState>(
@@ -113,7 +119,7 @@ class _EditTaskViewState extends State<EditTaskView> {
                                 ],
                               ),
                               content: Text(
-                                "Are you sure you want to delete this task?",
+                                TranslationKeys.deleteTaskMsgTitle.tr,
                                 style: TextStyle(
                                   fontSize: 16,
                                   color: Colors.black54,
@@ -141,7 +147,9 @@ class _EditTaskViewState extends State<EditTaskView> {
                                       vertical: 10,
                                     ),
                                   ),
-                                  child: Text("Cancel"),
+                                  child: Text(
+                                    TranslationKeys.cancelBtnTitle.tr,
+                                  ),
                                 ),
                                 SizedBox(width: 10),
                                 ElevatedButton(
@@ -163,7 +171,9 @@ class _EditTaskViewState extends State<EditTaskView> {
                                       vertical: 10,
                                     ),
                                   ),
-                                  child: Text("Delete"),
+                                  child: Text(
+                                    TranslationKeys.deleteBtnTitle.tr,
+                                  ),
                                 ),
                               ],
                             ),
@@ -288,14 +298,14 @@ class _EditTaskViewState extends State<EditTaskView> {
                     // ),
                     SizedBox(height: 17),
                     state is EditTaskLoadingState
-                        ? CircularProgressIndicator()
+                        ? CustomCircularProgressIndicator()
                         : CustomOutLinedelevatedbutton.getElevatedButton(
                           onTap: () {
                             EditTaskCubit.get(
                               context,
                             ).onUpDateBtnPressed(EditTaskCubit.id);
                           },
-                          title: "Update",
+                          title: TranslationKeys.updateBtnTitle.tr,
                         ),
                   ],
                 ),
